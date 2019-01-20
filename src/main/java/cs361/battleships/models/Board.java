@@ -1,15 +1,23 @@
 package cs361.battleships.models;
 
+import java.io.Console;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Board {
+
+
+	private List<Result> attacks;
+
 
 	/*
 	DO NOT change the signature of this method. It is used by the grading scripts.
 	 */
 	public Board() {
 		// TODO Implement
+
+		// Create Lists
+		attacks = new ArrayList<Result>();
 	}
 
 	/*
@@ -43,6 +51,7 @@ public class Board {
 	}
 
 	public void setAttacks(List<Result> attacks) {
-		//TODO implement
+        //TODO implement
+
 	}
 }
