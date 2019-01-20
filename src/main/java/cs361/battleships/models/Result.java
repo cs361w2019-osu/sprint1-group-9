@@ -2,6 +2,14 @@ package cs361.battleships.models;
 
 public class Result {
 
+	private Ship ship;
+	private Square square;
+
+
+	public Result(Square square) {
+		this.square = square;
+	}
+
 	public AtackStatus getResult() {
 		//TODO implement
 		return null;
