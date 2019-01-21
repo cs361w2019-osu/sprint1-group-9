@@ -35,11 +35,13 @@ public class Board {
 	 */
 	public Result attack(int x, char y) {
 
+		System.out.println("Attacking...");
 		// create square and result default
 		var firePos = new Square(x, y);
 		var result = new Result(firePos);
 		result.setResult(AtackStatus.MISS);
 
+		System.out.println("Checking if attack hit anything...");
         // search if there are any matching ship pos
 		var shipOp = ships.stream().filter(ship ->
                 ship.getOccupiedSquares().stream().anyMatch(sPos ->
@@ -47,24 +49,32 @@ public class Board {
 
 		// if ship present, mark hit and check if its a sink
 		shipOp.ifPresent(ship -> {
-		    result.setShip(ship);
+			System.out.println("Hit!");
+			result.setShip(ship);
 
 		    //check if sink
+			System.out.println("Checking if sink...");
 		    if( ship.getOccupiedSquares().stream().allMatch(sPos ->
-                    attacks.stream().anyMatch(att -> sPos.equals(att.getLocation()))))
-		        result.setResult(AtackStatus.SUNK);
+                    attacks.stream().anyMatch(att -> sPos.equals(att.getLocation())))) {
+		    	System.out.println("Sunk!");
+				result.setResult(AtackStatus.SUNK);
+			}
+
 		    else
 		        result.setResult(AtackStatus.HIT);
         });
 
+		System.out.println("Checking for endGame...");
 		// check if game ends
         if( ships.stream().allMatch(ship ->
                 ship.getOccupiedSquares().stream().allMatch(sPos ->
-                        attacks.stream().anyMatch(att -> sPos.equals(att.getLocation())))) )
-            result.setResult(AtackStatus.SURRENDER);
-
+                        attacks.stream().anyMatch(att -> sPos.equals(att.getLocation())))) ) {
+        	System.out.println("Game has ended!");
+			result.setResult(AtackStatus.SURRENDER);
+		}
 
 		// return val
+		attacks.add(result);
 		return result;
 	}
 
