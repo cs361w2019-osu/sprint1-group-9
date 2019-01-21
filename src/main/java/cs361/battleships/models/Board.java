@@ -40,6 +40,7 @@ public class Board {
 		var firePos = new Square(x, y);
 		var result = new Result(firePos);
 		result.setResult(AtackStatus.MISS);
+		attacks.add(result);
 
 		System.out.println("Checking if attack hit anything...");
         // search if there are any matching ship pos
@@ -74,7 +75,6 @@ public class Board {
 		}
 
 		// return val
-		attacks.add(result);
 		return result;
 	}
 
