@@ -8,6 +8,7 @@ public class Board {
 
 
 	private List<Result> attacks;
+	private List<Ship> ships;
 
 
 	/*
@@ -18,6 +19,7 @@ public class Board {
 
 		// Create Lists
 		attacks = new ArrayList<Result>();
+		ships = new ArrayList<Ship>();
 	}
 
 	/*
