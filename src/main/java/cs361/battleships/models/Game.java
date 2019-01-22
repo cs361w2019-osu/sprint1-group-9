@@ -35,8 +35,9 @@ public class Game {
 	DO NOT change the signature of this method. It is used by the grading scripts.
 	 */
     public boolean attack(int x, char  y) {
+        System.out.println("Attack request came in!");
         Result playerAttack = opponentsBoard.attack(x, y);
-        if (playerAttack.getResult() == INVALID) {
+        if (playerAttack.getResult() == AtackStatus.INVALID) {
             return false;
         }
 
@@ -45,7 +46,7 @@ public class Game {
             // AI does random attacks, so it might attack the same spot twice
             // let it try until it gets it right
             opponentAttackResult = playersBoard.attack(randRow(), randCol());
-        } while(opponentAttackResult.getResult() != INVALID);
+        } while(opponentAttackResult.getResult() == AtackStatus.INVALID);
 
         return true;
     }

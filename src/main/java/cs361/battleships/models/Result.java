@@ -2,8 +2,14 @@ package cs361.battleships.models;
 
 public class Result {
 
+	private Ship ship;
+	private Square square;
 	private AtackStatus result;
-	private Square location;
+
+
+	public Result(Square square) {
+		this.square = square;
+	}
 
 	public AtackStatus getResult() {
 		return result;
@@ -14,19 +20,18 @@ public class Result {
 	}
 
 	public Ship getShip() {
-		//TODO implement
-		return null;
+		return this.ship;
 	}
 
 	public void setShip(Ship ship) {
-		//TODO implement
+		this.ship = ship;
 	}
 
 	public Square getLocation() {
-		return location;
+		return this.square;
 	}
 
 	public void setLocation(Square square) {
-		location = square;
+		this.square = square;
 	}
 }
