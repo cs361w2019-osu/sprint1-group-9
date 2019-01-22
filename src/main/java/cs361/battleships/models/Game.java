@@ -22,10 +22,10 @@ public class Game {
         System.out.println("A place ship request is in!");
         System.out.println("Player is adding ship...");
         boolean successful = playersBoard.placeShip(ship, x, y, isVertical);
-
-
-        if (!successful)
+        if (!successful) {
+            System.out.println("Invalid placement");
             return false;
+        }
 
         boolean opponentPlacedSuccessfully;
         do {
@@ -33,7 +33,8 @@ public class Game {
             // let it try until it gets it right
             System.out.println("Enemy is adding ship...");
             opponentPlacedSuccessfully = opponentsBoard.placeShip(ship, randRow(), randCol(), randVertical());
-        } while (opponentPlacedSuccessfully);
+            System.out.println("Placement was " + opponentPlacedSuccessfully);
+        } while (!opponentPlacedSuccessfully);
 
         System.out.println("Players Ships: ");
         playersBoard.getShips().forEach(s -> {
@@ -45,7 +46,7 @@ public class Game {
             System.out.println("\t" + s.getKind());
         });
 
-
+        System.out.println("Ending ship placements");
         return true;
     }
 
@@ -71,6 +72,7 @@ public class Game {
         } while(opponentAttackResult.getResult() == AtackStatus.INVALID);
 
 
+        System.out.println("Ending attacks");
         return true;
     }
 

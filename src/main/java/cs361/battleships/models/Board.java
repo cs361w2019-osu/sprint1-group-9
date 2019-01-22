@@ -89,6 +89,7 @@ public class Board
 		}
 
 		// return val
+		System.out.println("Returning attack result " + result.getResult());
 		return result;
 	}
 
