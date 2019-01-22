@@ -17,7 +17,13 @@ public class Game {
 	DO NOT change the signature of this method. It is used by the grading scripts.
 	 */
     public boolean placeShip(Ship ship, int x, char y, boolean isVertical) {
+        System.out.println("");
+        System.out.println("");
+        System.out.println("A place ship request is in!");
+        System.out.println("Player is adding ship...");
         boolean successful = playersBoard.placeShip(ship, x, y, isVertical);
+
+
         if (!successful)
             return false;
 
@@ -25,8 +31,20 @@ public class Game {
         do {
             // AI places random ships, so it might try and place overlapping ships
             // let it try until it gets it right
+            System.out.println("Enemy is adding ship...");
             opponentPlacedSuccessfully = opponentsBoard.placeShip(ship, randRow(), randCol(), randVertical());
         } while (opponentPlacedSuccessfully);
+
+        System.out.println("Players Ships: ");
+        playersBoard.getShips().forEach(s -> {
+            System.out.println("\t" + s.getKind());
+        });
+
+        System.out.println("Enemy Ships: ");
+        opponentsBoard.getShips().forEach(s -> {
+            System.out.println("\t" + s.getKind());
+        });
+
 
         return true;
     }
@@ -35,7 +53,10 @@ public class Game {
 	DO NOT change the signature of this method. It is used by the grading scripts.
 	 */
     public boolean attack(int x, char  y) {
+        System.out.println("");
+        System.out.println("");
         System.out.println("Attack request came in!");
+        System.out.println("Player is attempting to attack...");
         Result playerAttack = opponentsBoard.attack(x, y);
         if (playerAttack.getResult() == AtackStatus.INVALID) {
             return false;
@@ -45,15 +66,17 @@ public class Game {
         do {
             // AI does random attacks, so it might attack the same spot twice
             // let it try until it gets it right
+            System.out.println("Enemy is attempting to attack...");
             opponentAttackResult = playersBoard.attack(randRow(), randCol());
         } while(opponentAttackResult.getResult() == AtackStatus.INVALID);
+
 
         return true;
     }
 
     private char randCol() {
         Random rand = new Random();
-        char randchar = (char)(rand.nextInt(10) + 'a');
+        char randchar = (char)(rand.nextInt(10) + 'A');
         return randchar;
     }
 
