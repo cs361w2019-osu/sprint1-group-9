@@ -41,10 +41,49 @@ public class Board
 	/*
 	DO NOT change the signature of this method. It is used by the grading scripts.
 	 */
-	public Result attack(int x, char y)
-	{
-		//TODO Implement
-		return null;
+	public Result attack(int x, char y) {
+
+		System.out.println("Attacking...");
+		// create square and result default
+		var firePos = new Square(x, y);
+		var result = new Result(firePos);
+		result.setResult(AtackStatus.MISS);
+		attacks.add(result);
+
+		System.out.println("Checking if attack hit anything...");
+		// search if there are any matching ship pos
+		var shipOp = ships.stream().filter(ship ->
+				ship.getOccupiedSquares().stream().anyMatch(sPos ->
+						sPos.equals(firePos))).findAny();
+
+		// if ship present, mark hit and check if its a sink
+		shipOp.ifPresent(ship -> {
+			System.out.println("Hit!");
+			result.setShip(ship);
+
+			//check if sink
+			System.out.println("Checking if sink...");
+			if( ship.getOccupiedSquares().stream().allMatch(sPos ->
+					attacks.stream().anyMatch(att -> sPos.equals(att.getLocation())))) {
+				System.out.println("Sunk!");
+				result.setResult(AtackStatus.SUNK);
+			}
+
+			else
+				result.setResult(AtackStatus.HIT);
+		});
+
+		System.out.println("Checking for endGame...");
+		// check if game ends
+		if( ships.stream().allMatch(ship ->
+				ship.getOccupiedSquares().stream().allMatch(sPos ->
+						attacks.stream().anyMatch(att -> sPos.equals(att.getLocation())))) ) {
+			System.out.println("Game has ended!");
+			result.setResult(AtackStatus.SURRENDER);
+		}
+
+		// return val
+		return result;
 	}
 
 	public List<Ship> getShips()
@@ -59,13 +98,12 @@ public class Board
 
 	public List<Result> getAttacks()
 	{
-		//TODO implement
-		return null;
+		return attacks;
 	}
 
 	public void setAttacks(List<Result> attacks)
 	{
-		//TODO implement
+		this.attacks = attacks;
 	}
 
 	/*
