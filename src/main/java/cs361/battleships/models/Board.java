@@ -24,6 +24,7 @@ public class Board {
 	DO NOT change the signature of this method. It is used by the grading scripts.
 	 */
 	public boolean placeShip(Ship ship, int x, char y, boolean isVertical) {
+		System.out.println("###place Ship called");
 		int shipSize = ship.getSize();
 		if(this.getShips().size() > 0)
 		{
