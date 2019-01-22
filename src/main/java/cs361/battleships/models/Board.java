@@ -1,21 +1,24 @@
 package cs361.battleships.models;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.io.Console;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Board {
 
-	@JsonProperty private ArrayList<Ship> ships;
+	private List<Result> attacks;
+	private List<Ship> ships;
 
 	/*
 	DO NOT change the signature of this method. It is used by the grading scripts.
 	 */
-	public Board()
-	{
-		this.ships = new ArrayList<>();
-	}
+	public Board() {
+		// Create Lists
+		attacks = new ArrayList<Result>();
+		ships = new ArrayList<Ship>();
+  }
 
 	/*
 	DO NOT change the signature of this method. It is used by the grading scripts.
@@ -26,7 +29,7 @@ public class Board {
 		{
 			if (!validShipType(ship))
 				return false;
-		}
+	 	}
 
 		if(validLocation(shipSize, x, y, isVertical))
 		{
@@ -41,8 +44,48 @@ public class Board {
 	DO NOT change the signature of this method. It is used by the grading scripts.
 	 */
 	public Result attack(int x, char y) {
-		//TODO Implement
-		return null;
+
+		System.out.println("Attacking...");
+		// create square and result default
+		var firePos = new Square(x, y);
+		var result = new Result(firePos);
+		result.setResult(AtackStatus.MISS);
+		attacks.add(result);
+
+		System.out.println("Checking if attack hit anything...");
+        // search if there are any matching ship pos
+		var shipOp = ships.stream().filter(ship ->
+                ship.getOccupiedSquares().stream().anyMatch(sPos ->
+                        sPos.equals(firePos))).findAny();
+
+		// if ship present, mark hit and check if its a sink
+		shipOp.ifPresent(ship -> {
+			System.out.println("Hit!");
+			result.setShip(ship);
+
+		    //check if sink
+			System.out.println("Checking if sink...");
+		    if( ship.getOccupiedSquares().stream().allMatch(sPos ->
+                    attacks.stream().anyMatch(att -> sPos.equals(att.getLocation())))) {
+		    	System.out.println("Sunk!");
+				result.setResult(AtackStatus.SUNK);
+			}
+
+		    else
+		        result.setResult(AtackStatus.HIT);
+        });
+
+		System.out.println("Checking for endGame...");
+		// check if game ends
+        if( ships.stream().allMatch(ship ->
+                ship.getOccupiedSquares().stream().allMatch(sPos ->
+                        attacks.stream().anyMatch(att -> sPos.equals(att.getLocation())))) ) {
+        	System.out.println("Game has ended!");
+			result.setResult(AtackStatus.SURRENDER);
+		}
+
+		// return val
+		return result;
 	}
 
 	public List<Ship> getShips()
@@ -50,20 +93,19 @@ public class Board {
 		return this.ships;
 	}
 
-	public void setShips(ArrayList<Ship> ships)
+	public void setShips(List<Ship> ships)
 	{
 		this.ships = ships;
 	}
 
 	public List<Result> getAttacks() {
-		//TODO implement
-		return null;
+		return attacks;
 	}
-
-	public void setAttacks(List<Result> attacks) {
-		//TODO implement
-	}
-
+  
+  public void setAttacks(List<Result> attacks) {
+    this.attacks = attacks;
+  }
+  
 	private boolean validShipType(Ship ship)
 	{
 		for(Ship ships : this.getShips())
