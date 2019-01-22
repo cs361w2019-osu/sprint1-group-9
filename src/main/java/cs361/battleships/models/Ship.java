@@ -5,9 +5,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Ship {
+public class Ship
+{
 
-	@JsonProperty private ArrayList<Square> occupiedSquares;
+	@JsonProperty private List<Square> occupiedSquares;
 	@JsonProperty private String kind;
 	@JsonProperty private int size;
 
@@ -15,25 +16,26 @@ public class Ship {
 	{
 		this.occupiedSquares = new ArrayList<>();
 		this.kind = new String();
-		this.size = 0;
+		this.size=0;
 	}
-	
+
 	public Ship(String kind)
 	{
 		this.kind = kind;
-		this.size = 0;
+		this.size=0;
 		if(kind.equals("MINESWEEPER"))
 		{
-			this.size = 2;
+			this.size=2;
 		}
 		else if(kind.equals("DESTROYER"))
 		{
-			this.size = 3;
+			this.size=3;
 		}
-		else //BATTLESHIP
+		else if(kind.equals("BATTLESHIP"))
 		{
-			this.size = 4;
+			this.size=4;
 		}
+		this.occupiedSquares = new ArrayList<>();
 	}
 
 	public List<Square> getOccupiedSquares()
@@ -41,14 +43,14 @@ public class Ship {
 		return this.occupiedSquares;
 	}
 
-	public String getKind()		//Getting for Kind
+	public String getKind()
 	{
 		return this.kind;
 	}
 
-	public void populatedSquares(int x, char y, boolean vert)
+	public void populateSquares(int x, char y, boolean vert)
 	{
-		for(int i=0; i < this.size; ++i)
+		for(int i = 0; i<this.size; i++)
 		{
 			this.occupiedSquares.add(new Square(x,y));
 			if(vert) x++;
