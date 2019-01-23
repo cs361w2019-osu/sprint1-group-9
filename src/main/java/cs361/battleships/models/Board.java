@@ -24,13 +24,19 @@ public class Board
 	 */
 	public boolean placeShip(Ship ship, int x, char y, boolean isVertical)
 	{
+		System.out.println("Attempting to place ship...");
 		int shipSize = ship.getSize();
+
+		System.out.println("Validating ship type " + ship.getKind() + "...");
 		if (this.getShips().size() > 0)
 		{
 			if (!validShipType(ship)) return false;
 		}
+
+		System.out.println("Validating ship location " + x + y + "...");
 		if (validLocation(shipSize, x, y, isVertical))
 		{
+			System.out.println("Success! Adding ship!");
 			ship.populateSquares(x, y, isVertical);
 			this.ships.add(ship);
 			return true;
@@ -83,6 +89,7 @@ public class Board
 		}
 
 		// return val
+		System.out.println("Returning attack result " + result.getResult());
 		return result;
 	}
 
