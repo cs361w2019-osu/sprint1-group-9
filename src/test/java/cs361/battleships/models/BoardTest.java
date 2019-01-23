@@ -93,8 +93,7 @@ public class BoardTest {
     @Test
     public void testInvalidAttack(){
         Board board = new Board();
-        board.placeShip(new Ship("BATTLESHIP"), 2, 'B', false );
-        AtackStatus aStatus = AtackStatus.HIT;
+        AtackStatus aStatus = AtackStatus.INVALID;
         assertEquals(aStatus, board.attack(5, 'K').getResult());
     }
 

@@ -44,6 +44,18 @@ public class Board
 		return false;
 	}
 
+	public boolean checkAttackValid(Result result){
+		Square temp = result.getLocation();
+		boolean check = attacks.stream().anyMatch(A->A.getLocation().equals(result.getLocation()));
+		System.out.println(check);
+		if (temp.getColumn() >= 'A' && temp.getColumn() <= 'J' ){
+			if (temp.getRow() >= 1 && temp.getRow() <= 10 ){
+				if (!check) return true;
+			}
+		}
+		return false;
+	}
+
 	/*
 	DO NOT change the signature of this method. It is used by the grading scripts.
 	 */
@@ -53,6 +65,12 @@ public class Board
 		// create square and result default
 		var firePos = new Square(x, y);
 		var result = new Result(firePos);
+
+		if (!checkAttackValid(result)){
+			result.setResult(AtackStatus.INVALID);
+			return result;
+		}
+
 		result.setResult(AtackStatus.MISS);
 		attacks.add(result);
 
