@@ -79,6 +79,7 @@ public class BoardTest {
     @Test
     public void testInvalidOverlapPlacement(){
         Board board = new Board();
+        board.placeShip(new Ship("BATTLESHIP"), 2, 'B', false );
         assertTrue(board.placeShip(new Ship("BATTLESHIP"), 2, 'B', false));
     }
 
@@ -92,6 +93,7 @@ public class BoardTest {
     @Test
     public void testInvalidAttack(){
         Board board = new Board();
+        board.placeShip(new Ship("BATTLESHIP"), 2, 'B', false );
         AtackStatus aStatus = AtackStatus.HIT;
         assertEquals(aStatus, board.attack(5, 'K').getResult());
     }
@@ -106,6 +108,7 @@ public class BoardTest {
     @Test
     public void testValidAttack(){
         Board board = new Board();
+        board.placeShip(new Ship("BATTLESHIP"), 2, 'B', false );
         AtackStatus bStatus = AtackStatus.HIT;
         assertEquals(bStatus, board.attack(2, 'B').getResult());
     }
