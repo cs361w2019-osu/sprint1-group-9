@@ -53,7 +53,7 @@ public class BoardTest {
     @Test
     public void testInvalidPlacement() {
         Board board = new Board();
-        assertTrue(board.placeShip(new Ship("MINESWEEPER"), 11, 'C', true));
+        assertFalse(board.placeShip(new Ship("MINESWEEPER"), 11, 'C', true));
     }
 
     /*****************************************
@@ -66,7 +66,7 @@ public class BoardTest {
     @Test
     public void testInvalidEdgePlacement(){
         Board board = new Board();
-        assertTrue(board.placeShip(new Ship("BATTLESHIP"), 6, 'J', false ));
+        assertFalse(board.placeShip(new Ship("BATTLESHIP"), 6, 'J', false ));
     }
 
     /*****************************************
@@ -80,7 +80,7 @@ public class BoardTest {
     public void testInvalidOverlapPlacement(){
         Board board = new Board();
         board.placeShip(new Ship("BATTLESHIP"), 2, 'B', false );
-        assertTrue(board.placeShip(new Ship("BATTLESHIP"), 2, 'B', false));
+        assertFalse(board.placeShip(new Ship("BATTLESHIP"), 2, 'B', false));
     }
 
     /*****************************************
