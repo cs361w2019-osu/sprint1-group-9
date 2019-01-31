@@ -1,114 +1,86 @@
 package cs361.battleships.models;
 
+import org.junit.Before;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertEquals;
 
 public class BoardTest {
 
-    /*****************************************
-     *
-     * Placing a MINESWEEPER; should return TRUE
-     * (Placed vertically at coordinates (6, F))
-     *
-     ****************************************/
-    @Test
-    public void testValidPlacementMinesweeper(){
-        Board board = new Board();
-        assertTrue(board.placeShip(new Ship("MINESWEEPER"), 6, 'F', true));
+    private Board board;
+
+    @Before
+    public void setUp() {
+        board = new Board();
     }
 
-    /*****************************************
-     *
-     * Placing a DESTROYER; should return TRUE
-     * (Placed horizontally at coordinates (4, B))
-     *
-     ****************************************/
-    @Test
-    public void testValidPlacementDestroyer() {
-        Board board = new Board();
-        assertTrue(board.placeShip(new Ship("DESTROYER"), 4, 'B', false));
-    }
-
-    /*****************************************
-     *
-     * Placing a BATTLESHIP; should return TRUE
-     * (Placed horizontally at coordinates (2, B))
-     *
-     ****************************************/
-    @Test
-    public void testValidPlacementBattleship() {
-        Board board = new Board();
-        assertTrue(board.placeShip(new Ship("BATTLESHIP"), 2, 'B', false ));
-    }
-
-    /*****************************************
-     *
-     * Placing a MINESWEEPER; should return FALSE
-     * (Placed horizontally at coordinates (11, C))
-     *
-     ****************************************/
     @Test
     public void testInvalidPlacement() {
-        Board board = new Board();
         assertFalse(board.placeShip(new Ship("MINESWEEPER"), 11, 'C', true));
     }
 
-    /*****************************************
-     *
-     * Placing a BATTLESHIP hanging off the edge
-     *      of the board; should return FALSE.
-     * (Placed horizontally at coordinates (6, J))
-     *
-     ****************************************/
     @Test
-    public void testInvalidEdgePlacement(){
-        Board board = new Board();
-        assertFalse(board.placeShip(new Ship("BATTLESHIP"), 6, 'J', false ));
+    public void testPlaceMinesweeper() {
+        assertTrue(board.placeShip(new Ship("MINESWEEPER"), 1, 'A', true));
     }
 
-    /*****************************************
-     *
-     * Placing BATTLESHIP on established BATTLESHIP;
-     *      should return FALSE.
-     * (Placed horizontally at coordinates (2, B))
-     *
-     ****************************************/
     @Test
-    public void testInvalidOverlapPlacement(){
-        Board board = new Board();
-        board.placeShip(new Ship("BATTLESHIP"), 2, 'B', false );
-        assertFalse(board.placeShip(new Ship("BATTLESHIP"), 2, 'B', false));
+    public void testAttackEmptySquare() {
+        board.placeShip(new Ship("MINESWEEPER"), 1, 'A', true);
+        Result result = board.attack(2, 'E');
+        assertEquals(AtackStatus.MISS, result.getResult());
     }
 
-    /*****************************************
-     *
-     * Testing an INVALID ATTACK; should return
-     *      FALSE.
-     * (Attacking at coordinates (5, K))
-     *
-     ****************************************/
     @Test
-    public void testInvalidAttack(){
-        Board board = new Board();
-        AtackStatus aStatus = AtackStatus.INVALID;
-        assertEquals(aStatus, board.attack(5, 'K').getResult());
+    public void testAttackShip() {
+        Ship minesweeper = new Ship("MINESWEEPER");
+        board.placeShip(minesweeper, 1, 'A', true);
+        minesweeper = board.getShips().get(0);
+        Result result = board.attack(1, 'A');
+        assertEquals(AtackStatus.HIT, result.getResult());
+        assertEquals(minesweeper, result.getShip());
     }
 
-    /*****************************************
-     *
-     * Testing a VALID ATTACK; should return
-     *      TRUE.
-     * (Attacking at coordinates (2, B))
-     *
-     ****************************************/
     @Test
-    public void testValidAttack(){
-        Board board = new Board();
-        board.placeShip(new Ship("BATTLESHIP"), 2, 'B', false );
-        AtackStatus bStatus = AtackStatus.HIT;
-        assertEquals(bStatus, board.attack(2, 'B').getResult());
+    public void testAttackSameSquareMultipleTimes() {
+        Ship minesweeper = new Ship("MINESWEEPER");
+        board.placeShip(minesweeper, 1, 'A', true);
+        board.attack(1, 'A');
+        Result result = board.attack(1, 'A');
+        assertEquals(AtackStatus.INVALID, result.getResult());
+    }
+
+    @Test
+    public void testAttackSameEmptySquareMultipleTimes() {
+        Result initialResult = board.attack(1, 'A');
+        assertEquals(AtackStatus.MISS, initialResult.getResult());
+        Result result = board.attack(1, 'A');
+        assertEquals(AtackStatus.INVALID, result.getResult());
+    }
+
+    @Test
+    public void testSurrender() {
+        board.placeShip(new Ship("MINESWEEPER"), 1, 'A', true);
+        board.attack(1, 'A');
+        var result = board.attack(2, 'A');
+        assertEquals(AtackStatus.SURRENDER, result.getResult());
+    }
+
+    @Test
+    public void testPlaceMultipleShipsOfSameType() {
+        assertTrue(board.placeShip(new Ship("MINESWEEPER"), 1, 'A', true));
+        assertFalse(board.placeShip(new Ship("MINESWEEPER"), 5, 'D', true));
+
+    }
+
+    @Test
+    public void testCantPlaceMoreThan3Ships() {
+        assertTrue(board.placeShip(new Ship("MINESWEEPER"), 1, 'A', true));
+        assertTrue(board.placeShip(new Ship("BATTLESHIP"), 5, 'D', true));
+        assertTrue(board.placeShip(new Ship("DESTROYER"), 6, 'A', false));
+        assertFalse(board.placeShip(new Ship(""), 8, 'A', false));
+
     }
 }
