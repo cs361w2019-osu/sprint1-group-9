@@ -5,12 +5,13 @@
     <meta charset="utf-8">
     <title>${title}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <!-- This is a stylesheet that includes the font you should use: Roboto -->
+      <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/custom.css">
 
 <body>
+    <#include "header.ftl.html"/>
     <div class="container">
-        
-        <#include "header.ftl.html"/>
         
         <#if (flash.error)??>
             <div class="alert alert-danger">
@@ -26,9 +27,10 @@
 
         <#nested/>
 
-        <#include "footer.ftl.html"/>
+        
         
     </div> <!-- /container -->
+    <#include "footer.ftl.html"/>
 </body>
 </html>
 </#macro>
