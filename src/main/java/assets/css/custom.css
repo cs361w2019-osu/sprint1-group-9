@@ -2,21 +2,30 @@
 -------------------------------------------------- */
 
 .battleGrid {
-    border: 1px solid black;
-    border-spacing: 0px;
+    border: none;
+    border-spacing: 3px;
 }
 
 .battleGrid tr {
-    border: 1px solid black;
+    border: none;
     height: 30px;
 }
 
-.battleGrid td {
-    border: 1px solid black;
+.square {
     width: 30px;
+    border: none;
+    background: cornflowerblue;
 }
 
-td:hover {
+.col-header {
+    text-align: center;
+    border: none;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+}
+
+.square:hover {
     background-color: gray;
 }
 
