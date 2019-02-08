@@ -2,12 +2,13 @@
 -------------------------------------------------- */
 
 .battleGrid {
-    border: none;
-    border-spacing: 3px;
+    border: 1px solid black;
+    border-spacing: 0px;
+    background: cornflowerblue;
 }
 
 .battleGrid tr {
-    border: none;
+    border: 1px solid black;
     height: 30px;
 }
 
@@ -38,6 +39,7 @@
 }
 
 .hit {
+    border-radius: 60%;
     background-color: orange;
 }
 
@@ -46,5 +48,6 @@
 }
 
 .miss {
+    border-radius: 60%;
     background-color: blue;
 }
