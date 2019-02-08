@@ -7,22 +7,26 @@ body {
 }
 
 .battleGrid {
-    margin: 15px;
-    border: 1px solid black;
-    border-spacing: 0px;
+    border-spacing: 0px solid transparent;
 }
 
-.battleGrid tr {
-    border: 1px solid black;
-    height: 30px;
-}
 
-.battleGrid td {
-    border: 1px solid black;
+.square {
     width: 30px;
+    border: 1px solid black;
+    background: cornflowerblue;
 }
 
-td:hover {
+.col-header {
+    text-align: center;
+    border: none;
+    width: 30px;
+    height: 30px;
+    background: transparent;
+    padding: 0;
+}
+
+.square:hover {
     background-color: gray;
 }
 
@@ -35,6 +39,7 @@ td:hover {
 }
 
 .hit {
+    border-radius: 60%;
     background-color: orange;
 }
 
@@ -43,12 +48,13 @@ td:hover {
 }
 
 .miss {
+    border-radius: 60%;
     background-color: blue;
 }
 
 .container {
     margin:  20px 20% auto;
-    
+
 }
 
 .game-container {
