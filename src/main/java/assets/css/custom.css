@@ -1,5 +1,11 @@
 /* Add additional stylesheets below
 -------------------------------------------------- */
+
+body {
+    font-family: Roboto, Helvetica, sans-serif;
+    margin: 0px;
+}
+
 .battleGrid {
     border-spacing: 0px solid transparent;
 }
@@ -44,4 +50,38 @@
 .miss {
     border-radius: 60%;
     background-color: blue;
+}
+
+.container {
+    margin:  20px 20% auto;
+
+}
+
+.game-container {
+    display: inline-grid;
+    grid-template-columns: auto auto;
+}
+
+.board-title {
+    text-align: center;
+    margin: 5px;
+    font-weight: 600;
+}
+
+
+header {
+    background-color: black;
+    margin: 0px;
+    padding: 10px;
+    color: white;
+    text-align: center;
+    font-size: 30px;
+    font-weight: 200;
+}
+
+footer {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    font-size: 10px;
 }
