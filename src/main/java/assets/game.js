@@ -5,10 +5,27 @@ var shipType;
 var vertical;
 
 function makeGrid(table, isPlayer) {
+    // add colmn header
+    let titrow = document.createElement('tr');
+    titrow.appendChild(document.createElement("td"));
+    for (i=0; i<10; i++) {
+        let ele = document.createElement('td');
+        ele.classList.add('col-header');
+        ele.innerText = String.fromCharCode(97 + i);
+        titrow.appendChild(ele);
+    }
+    table.appendChild(titrow);
+    
     for (i=0; i<10; i++) {
         let row = document.createElement('tr');
+        // add row header
+        let rowtit = document.createElement('td');
+        rowtit.innerText = i + 1;
+        rowtit.classList.add('col-header');
+        row.appendChild(rowtit);
         for (j=0; j<10; j++) {
             let column = document.createElement('td');
+            column.classList.add("square");
             column.addEventListener("click", cellClick);
             row.appendChild(column);
         }
@@ -24,10 +41,10 @@ function markHits(board, elementId, surrenderText) {
         else if (attack.result === "HIT")
             className = "hit";
         else if (attack.result === "SUNK")
-            className = "hit"
+            className = "sink"
         else if (attack.result === "SURRENDER")
             alert(surrenderText);
-        document.getElementById(elementId).rows[attack.location.row-1].cells[attack.location.column.charCodeAt(0) - 'A'.charCodeAt(0)].classList.add(className);
+        document.getElementById(elementId).rows[attack.location.row].cells[attack.location.column.charCodeAt(0) - 'A'.charCodeAt(0) + 1].classList.add(className);
     });
 }
 
@@ -41,7 +58,7 @@ function redrawGrid() {
     }
 
     game.playersBoard.ships.forEach((ship) => ship.occupiedSquares.forEach((square) => {
-        document.getElementById("player").rows[square.row-1].cells[square.column.charCodeAt(0) - 'A'.charCodeAt(0)].classList.add("occupied");
+        document.getElementById("player").rows[square.row].cells[square.column.charCodeAt(0) - 'A'.charCodeAt(0) + 1].classList.add("occupied");
     }));
     markHits(game.opponentsBoard, "opponent", "You won the game");
     markHits(game.playersBoard, "player", "You lost the game");
@@ -50,8 +67,8 @@ function redrawGrid() {
 var oldListener;
 function registerCellListener(f) {
     let el = document.getElementById("player");
-    for (i=0; i<10; i++) {
-        for (j=0; j<10; j++) {
+    for (i=1; i<11; i++) {
+        for (j=1; j<11; j++) {
             let cell = el.rows[i].cells[j];
             cell.removeEventListener("mouseover", oldListener);
             cell.removeEventListener("mouseout", oldListener);
@@ -63,8 +80,8 @@ function registerCellListener(f) {
 }
 
 function cellClick() {
-    let row = this.parentNode.rowIndex + 1;
-    let col = String.fromCharCode(this.cellIndex + 65);
+    let row = this.parentNode.rowIndex;
+    let col = String.fromCharCode(this.cellIndex + 64);
     if (isSetup) {
         sendXhr("POST", "/place", {game: game, shipType: shipType, x: row, y: col, isVertical: vertical}, function(data) {
             game = data;
