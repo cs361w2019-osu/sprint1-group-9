@@ -87,7 +87,7 @@ function sendXhr(method, url, data, handler) {
     var req = new XMLHttpRequest();
     req.addEventListener("load", function(event) {
         if (req.status != 200) {
-            alert("Cannot complete the action");
+            alert("Error:\nCannot place ships on ships!\nCannot place off the grid!\nCannot attack the same square twice!");
             return;
         }
         handler(JSON.parse(req.responseText));
