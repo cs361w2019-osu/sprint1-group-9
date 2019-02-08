@@ -4,6 +4,7 @@
 .battleGrid {
     border: 1px solid black;
     border-spacing: 0px;
+    background: cornflowerblue;
 }
 
 .battleGrid tr {
@@ -15,6 +16,40 @@
     border: 1px solid black;
     width: 30px;
 }
+/*
+td:nth-child(1){
+    background: #68DFEC;
+}
+td:nth-child(2){
+    background: #5BD2DF;
+}
+td:nth-child(3){
+    background: #4EC1CE;
+}
+td:nth-child(4){
+    background: #40B1BD;
+}
+td:nth-child(5){
+    background: #38A3AF;
+}
+td:nth-child(6){
+    background: #32919B;
+}
+td:nth-child(7){
+    background: #247D87;
+}
+td:nth-child(8){
+    background: #1D727C;
+}
+td:nth-child(9){
+    background: #1A6972;
+}
+td:nth-child(10){
+    background: #125D65;
+}*/
+
+
+
 
 td:hover {
     background-color: gray;
@@ -29,6 +64,7 @@ td:hover {
 }
 
 .hit {
+    border-radius: 60%;
     background-color: orange;
 }
 
@@ -37,5 +73,6 @@ td:hover {
 }
 
 .miss {
+    border-radius: 60%;
     background-color: blue;
 }
