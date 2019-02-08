@@ -1,20 +1,13 @@
 /* Add additional stylesheets below
 -------------------------------------------------- */
-
 .battleGrid {
-    border: 1px solid black;
-    border-spacing: 0px;
-    background: cornflowerblue;
+    border-spacing: 0px solid transparent;
 }
 
-.battleGrid tr {
-    border: 1px solid black;
-    height: 30px;
-}
 
 .square {
     width: 30px;
-    border: none;
+    border: 1px solid black;
     background: cornflowerblue;
 }
 
@@ -23,6 +16,7 @@
     border: none;
     width: 30px;
     height: 30px;
+    background: transparent;
     padding: 0;
 }
 
