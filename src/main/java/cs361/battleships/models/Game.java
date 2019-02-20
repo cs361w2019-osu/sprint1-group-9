@@ -2,11 +2,9 @@ package cs361.battleships.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
-import static cs361.battleships.models.AtackStatus.*;
+import static cs361.battleships.models.AttackStatus.*;
 
 public class Game {
 
