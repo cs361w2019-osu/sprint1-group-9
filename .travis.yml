@@ -2,5 +2,4 @@ language: java
 jdk: openjdk10
 branches:
   only:
-    - master
-    - Travis_CI
+    - /.*/
