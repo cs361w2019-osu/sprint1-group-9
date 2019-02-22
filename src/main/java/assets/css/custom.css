@@ -69,6 +69,7 @@ td:hover {
 }
 
 .sink {
+    border-radius: 60%;
     background-color: red;
 }
 

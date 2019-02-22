@@ -10,6 +10,7 @@ public class Board {
 
 	@JsonProperty private List<Ship> ships;
 	@JsonProperty private List<Result> attacks;
+	@JsonProperty public List<Result> pings;
 
 	/*
 	DO NOT change the signature of this method. It is used by the grading scripts.
@@ -71,7 +72,92 @@ public class Board {
 		return attackResult;
 	}
 
+
 	List<Ship> getShips() {
 		return ships;
+	}
+
+
+
+	/********************************************************************
+	 * Function: getValidity()
+	 * Description: Gets individual coordinates and tests their ranges.
+	 * @param temp1
+	 * @param temp2
+	 * @return boolean true if in range; false if not
+	 ********************************************************************/
+
+	public void checkAndAppend(int temp1, char temp2) {
+		if (temp1 >= 1 && temp1 <= 10){
+			if (temp2 >= 'A' && temp2 <= 'J'){
+				System.out.println("Coordinates within range.\n");
+				Square s = new Square(temp1, temp2);
+				Result r = new Result(s);
+				pings.add(r);
+			}
+		}
+	}
+
+	/********************************************************************
+	 * Function: getPing()
+	 * Description:
+	 * @param square
+	 * @return void
+	 ********************************************************************/
+
+	public List<Result> getPingedList(Square square) {
+		int x = square.getRow();
+		char y = square.getColumn();
+
+		//Calculates the coordinates of the squares that should be returned using;
+		int temp1;
+		char temp2;
+
+		//...in the +y-direction:
+		for (int i = 1; i < 3; i++) {
+			temp1 = x - i;
+			temp2 = y;
+			checkAndAppend(temp1, temp2);
+		}
+
+		//...in the -y-direction:
+		for (int i = 1; i < 3; i++) {
+			temp1 = x + i;
+			temp2 = y;
+			checkAndAppend(temp1, temp2);
+		}
+
+		//...in the +x-direction:
+		for (int i = 1; i < 3; i++) {
+			temp1 = x;
+			temp2 = y += i;
+			checkAndAppend(temp1, temp2);
+		}
+
+		//...in the -x-direction:
+		for (int i = 1; i < 3; i++) {
+			temp1 = x;
+			temp2 = y -= i;
+			checkAndAppend(temp1, temp2);
+		}
+
+		//NE/NW/SE/SW:
+		temp1 = x+1;
+		temp2 = y++;
+		checkAndAppend(temp1, temp2);
+
+		temp1 = x+1;
+		temp2 = y--;
+		checkAndAppend(temp1, temp2);
+
+		temp1 = x-1;
+		temp2 = y++;
+		checkAndAppend(temp1, temp2);
+
+		temp1 = x-1;
+		temp2 = y--;
+		checkAndAppend(temp1, temp2);
+
+		return pings;
 	}
 }
