@@ -36,4 +36,6 @@ public class Result {
 	public Square getLocation() {
 		return location;
 	}
+
+
 }
