@@ -84,7 +84,7 @@ public class Board {
 	 * Description: Gets individual coordinates and tests their ranges.
 	 * @param temp1
 	 * @param temp2
-	 * @return boolean true if in range; false if not
+	 * @return boolean true if in range; false if not.
 	 ********************************************************************/
 
 	public void checkAndAppend(int temp1, char temp2) {
