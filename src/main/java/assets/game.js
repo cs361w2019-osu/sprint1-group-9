@@ -3,6 +3,7 @@ var placedShips = 0;
 var game;
 var shipType;
 var vertical;
+var ping = false;
 
 function makeGrid(table, isPlayer) {
     // add colmn header
@@ -44,7 +45,13 @@ function markHits(board, elementId, surrenderText) {
             className = "sink"
         else if (attack.result === "SURRENDER")
             alert(surrenderText);
-        document.getElementById(elementId).rows[attack.location.row].cells[attack.location.column.charCodeAt(0) - 'A'.charCodeAt(0) + 1].classList.add(className);
+        else
+            return;
+        let square = document.getElementById(elementId).rows[attack.location.row].cells[attack.location.column.charCodeAt(0) - 'A'.charCodeAt(0) + 1];
+        let mark = document.createElement('div');
+        mark.classList.add('mark-circle');
+        mark.classList.add(className);
+        square.appendChild(mark);
     });
 }
 
@@ -79,6 +86,22 @@ function registerCellListener(f) {
     oldListener = f;
 }
 
+function getSquare(row, col, board) {
+    return board.rows[row].cells[col.charCodeAt(0) - 'A'.charCodeAt(0) + 1];
+}
+
+function pingBoard(pingList) {
+    pingList.forEach(r => {
+        let square = getSquare(r.location.row, r.location.column, document.getElementById('opponent'));
+        if(r.result === "HIT") {
+            square.classList.add("ping-hit");
+        } else {
+            square.classList.add("ping-miss");
+        }
+
+    });
+}
+
 function cellClick() {
     let row = this.parentNode.rowIndex;
     let col = String.fromCharCode(this.cellIndex + 64);
@@ -92,6 +115,12 @@ function cellClick() {
                 registerCellListener((e) => {});
             }
         });
+    } else if(ping) {
+        ping = false;
+        sendXhr("POST", "/ping", {game: game, x: row, y: col}, function(data) {
+            pingBoard(data);
+        });
+
     } else {
         sendXhr("POST", "/attack", {game: game, x: row, y: col}, function(data) {
             game = data;
@@ -155,6 +184,9 @@ function initGame() {
     document.getElementById("place_battleship").addEventListener("click", function(e) {
         shipType = "BATTLESHIP";
        registerCellListener(place(4));
+    });
+    document.getElementById("ping-button").addEventListener("click", function(e) {
+        ping = true;
     });
     sendXhr("GET", "/game", {}, function(data) {
         game = data;

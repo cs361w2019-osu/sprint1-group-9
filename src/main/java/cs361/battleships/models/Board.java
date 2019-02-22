@@ -88,8 +88,8 @@ public class Board {
 	 ********************************************************************/
 
 	public void checkAndAppend(int temp1, char temp2) {
-		if (temp1 >= 1 && temp1 <= 10){
-			if (temp2 >= 'A' && temp2 <= 'J'){
+		if (true){
+			if (true){
 				System.out.println("Coordinates within range.\n");
 				Square s = new Square(temp1, temp2);
 				Result r = new Result(s);
@@ -108,6 +108,7 @@ public class Board {
 	public List<Result> getPingedList(Square square) {
 		int x = square.getRow();
 		char y = square.getColumn();
+		pings = new ArrayList<Result>();
 
 		//Calculates the coordinates of the squares that should be returned using;
 		int temp1;
@@ -157,6 +158,8 @@ public class Board {
 		temp1 = x-1;
 		temp2 = y--;
 		checkAndAppend(temp1, temp2);
+
+		pings.forEach(p -> System.out.println("Hello"));
 
 		return pings;
 	}

@@ -7,6 +7,8 @@ import ninja.Context;
 import ninja.Result;
 import ninja.Results;
 
+import java.util.List;
+
 @Singleton
 public class ApplicationController {
 
@@ -37,6 +39,16 @@ public class ApplicationController {
             return Results.json().render(game);
         } else {
             return Results.badRequest();
+        }
+    }
+
+    public Result ping(Context context, AttackGameAction g) {
+        Game game = g.getGame();
+        List<cs361.battleships.models.Result> res = game.ping(g.getActionRow(), g.getActionColumn());
+        if(res.isEmpty()) {
+            return  Results.badRequest();
+        } else {
+            return Results.json().render(res);
         }
     }
 }

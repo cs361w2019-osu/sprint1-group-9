@@ -13,6 +13,7 @@ body {
 
 .square {
     width: 30px;
+    hight: 30px;
     border: 1px solid black;
     background: cornflowerblue;
 }
@@ -39,23 +40,38 @@ body {
 }
 
 .hit {
-    border-radius: 60%;
-    background-color: orange;
+    background-color: #edbc64;
 }
 
 .sink {
-    border-radius: 60%;
-    background-color: red;
+    background-color: #ed7864;
 }
 
 .miss {
-    border-radius: 60%;
-    background-color: blue;
+    background-color: whitesmoke;
 }
 
 .container {
     margin:  20px 20% auto;
 
+}
+
+
+.mark-circle {
+    width: 15px;
+    height: 15px;
+    margin: auto;
+    border-radius: 50%;
+    border: 1px solid black;
+}
+
+
+.ping-hit {
+    background: #95ed64;
+}
+
+.ping-miss {
+    background: #a9c4f5;
 }
 
 .game-container {
