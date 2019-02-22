@@ -1,57 +1,32 @@
 /* Add additional stylesheets below
 -------------------------------------------------- */
 
+body {
+    font-family: Roboto, Helvetica, sans-serif;
+    margin: 0px;
+}
+
 .battleGrid {
+    border-spacing: 0px solid transparent;
+}
+
+
+.square {
+    width: 30px;
     border: 1px solid black;
-    border-spacing: 0px;
     background: cornflowerblue;
 }
 
-.battleGrid tr {
-    border: 1px solid black;
-    height: 30px;
-}
-
-.battleGrid td {
-    border: 1px solid black;
+.col-header {
+    text-align: center;
+    border: none;
     width: 30px;
+    height: 30px;
+    background: transparent;
+    padding: 0;
 }
-/*
-td:nth-child(1){
-    background: #68DFEC;
-}
-td:nth-child(2){
-    background: #5BD2DF;
-}
-td:nth-child(3){
-    background: #4EC1CE;
-}
-td:nth-child(4){
-    background: #40B1BD;
-}
-td:nth-child(5){
-    background: #38A3AF;
-}
-td:nth-child(6){
-    background: #32919B;
-}
-td:nth-child(7){
-    background: #247D87;
-}
-td:nth-child(8){
-    background: #1D727C;
-}
-td:nth-child(9){
-    background: #1A6972;
-}
-td:nth-child(10){
-    background: #125D65;
-}*/
 
-
-
-
-td:hover {
+.square:hover {
     background-color: gray;
 }
 
@@ -76,4 +51,38 @@ td:hover {
 .miss {
     border-radius: 60%;
     background-color: blue;
+}
+
+.container {
+    margin:  20px 20% auto;
+
+}
+
+.game-container {
+    display: inline-grid;
+    grid-template-columns: auto auto;
+}
+
+.board-title {
+    text-align: center;
+    margin: 5px;
+    font-weight: 600;
+}
+
+
+header {
+    background-color: black;
+    margin: 0px;
+    padding: 10px;
+    color: white;
+    text-align: center;
+    font-size: 30px;
+    font-weight: 200;
+}
+
+footer {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    font-size: 10px;
 }

@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Result {
 
-	@JsonProperty private AtackStatus result;
+	@JsonProperty private AttackStatus result;
 	@JsonProperty private Square location;
 	@JsonProperty private Ship ship;
 
@@ -13,15 +13,15 @@ public class Result {
 	}
 
 	public Result(Square location) {
-		result = AtackStatus.MISS;
+		result = AttackStatus.MISS;
 		this.location = location;
 	}
 
-	public AtackStatus getResult() {
+	public AttackStatus getResult() {
 		return result;
 	}
 
-	public void setResult(AtackStatus result) {
+	public void setResult(AttackStatus result) {
 		this.result = result;
 	}
 

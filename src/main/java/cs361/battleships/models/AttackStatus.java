@@ -1,6 +1,6 @@
 package cs361.battleships.models;
 
-public enum AtackStatus {
+public enum AttackStatus {
 
 	/**
 	 * The result if an attack results in a miss.

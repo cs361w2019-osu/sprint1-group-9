@@ -30,7 +30,7 @@ public class BoardTest {
     public void testAttackEmptySquare() {
         board.placeShip(new Ship("MINESWEEPER"), 1, 'A', true);
         Result result = board.attack(2, 'E');
-        assertEquals(AtackStatus.MISS, result.getResult());
+        assertEquals(AttackStatus.MISS, result.getResult());
     }
 
     @Test
@@ -39,7 +39,7 @@ public class BoardTest {
         board.placeShip(minesweeper, 1, 'A', true);
         minesweeper = board.getShips().get(0);
         Result result = board.attack(1, 'A');
-        assertEquals(AtackStatus.HIT, result.getResult());
+        assertEquals(AttackStatus.HIT, result.getResult());
         assertEquals(minesweeper, result.getShip());
     }
 
@@ -49,15 +49,15 @@ public class BoardTest {
         board.placeShip(minesweeper, 1, 'A', true);
         board.attack(1, 'A');
         Result result = board.attack(1, 'A');
-        assertEquals(AtackStatus.INVALID, result.getResult());
+        assertEquals(AttackStatus.INVALID, result.getResult());
     }
 
     @Test
     public void testAttackSameEmptySquareMultipleTimes() {
         Result initialResult = board.attack(1, 'A');
-        assertEquals(AtackStatus.MISS, initialResult.getResult());
+        assertEquals(AttackStatus.MISS, initialResult.getResult());
         Result result = board.attack(1, 'A');
-        assertEquals(AtackStatus.INVALID, result.getResult());
+        assertEquals(AttackStatus.INVALID, result.getResult());
     }
 
     @Test
@@ -65,7 +65,7 @@ public class BoardTest {
         board.placeShip(new Ship("MINESWEEPER"), 1, 'A', true);
         board.attack(1, 'A');
         var result = board.attack(2, 'A');
-        assertEquals(AtackStatus.SURRENDER, result.getResult());
+        assertEquals(AttackStatus.SURRENDER, result.getResult());
     }
 
     @Test
