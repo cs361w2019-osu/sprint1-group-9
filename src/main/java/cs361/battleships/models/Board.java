@@ -53,8 +53,17 @@ public class Board {
 		return attackResult;
 	}
 
+
+
+	private boolean isCQ(Square pos) {
+	    return ships.stream().anyMatch(ship ->
+                ship.getOccupiedSquares().stream().filter(s ->
+                    s.getCQ()).anyMatch(cq -> cq.equals(pos)));
+    }
+
+
 	private Result attack(Square s) {
-		if (attacks.stream().anyMatch(r -> r.getLocation().equals(s))) {
+		if (attacks.stream().anyMatch(r -> r.getLocation().equals(s) && !isCQ(r.getLocation()))) {
 			var attackResult = new Result(s);
 			attackResult.setResult(AttackStatus.INVALID);
 			return attackResult;
