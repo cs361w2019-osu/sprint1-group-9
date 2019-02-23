@@ -38,7 +38,7 @@ public class BoardTest {
         Ship minesweeper = new Ship("MINESWEEPER");
         board.placeShip(minesweeper, 1, 'A', true);
         minesweeper = board.getShips().get(0);
-        Result result = board.attack(1, 'A');
+        Result result = board.attack(2, 'A');
         assertEquals(AttackStatus.HIT, result.getResult());
         assertEquals(minesweeper, result.getShip());
     }
