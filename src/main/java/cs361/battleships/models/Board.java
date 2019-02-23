@@ -52,6 +52,7 @@ public class Board {
 	}
 
 
+
 	private boolean isCQ(Square pos) {
 	    return ships.stream().anyMatch(ship ->
                 ship.getOccupiedSquares().stream().filter(s ->
