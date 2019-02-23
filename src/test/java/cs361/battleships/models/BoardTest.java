@@ -63,8 +63,8 @@ public class BoardTest {
     @Test
     public void testSurrender() {
         board.placeShip(new Ship("MINESWEEPER"), 1, 'A', true);
-        board.attack(1, 'A');
-        var result = board.attack(2, 'A');
+        board.attack(2, 'A');
+        var result = board.attack(1, 'A');
         assertEquals(AttackStatus.SURRENDER, result.getResult());
     }
 
