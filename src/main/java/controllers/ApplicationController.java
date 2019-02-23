@@ -44,11 +44,11 @@ public class ApplicationController {
 
     public Result ping(Context context, AttackGameAction g) {
         Game game = g.getGame();
-        List<cs361.battleships.models.Result> res = game.ping(g.getActionRow(), g.getActionColumn());
-        if(res.isEmpty()) {
-            return  Results.badRequest();
+        var result = game.ping(g.getActionRow(), g.getActionColumn());
+        if (result) {
+            return Results.json().render(game);
         } else {
-            return Results.json().render(res);
+            return Results.badRequest();
         }
     }
 }

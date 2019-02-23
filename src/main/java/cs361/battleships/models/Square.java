@@ -21,7 +21,7 @@ public class Square {
 
 	public boolean getCQ(){ return cap;}
     public void setCQ(boolean s) { cap = s; }
-
+//
 
 	public char getColumn() {
 		return column;

@@ -118,7 +118,8 @@ function cellClick() {
     } else if(ping) {
         ping = false;
         sendXhr("POST", "/ping", {game: game, x: row, y: col}, function(data) {
-            pingBoard(data);
+            game = data;
+            pingBoard(data.opponentsBoard.pings);
         });
 
     } else {
