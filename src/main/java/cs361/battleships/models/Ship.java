@@ -4,15 +4,23 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.collect.Sets;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
+//import java.util.ArrayList;
+//import java.util.List;
+//import java.util.Set;
+import java.util.*;
 
 public class Ship {
 
 	@JsonProperty private String kind;
 	@JsonProperty private List<Square> occupiedSquares;
 	@JsonProperty private int size;
+	@JsonIgnore   private int cqPos;
+
+    @JsonProperty private Square CQuarters;
+    @JsonProperty private boolean isArmored;
+
+    //@JsonProperty private boolean cap = false;
+    //@JsonProperty private int health = 0;
 
 	public Ship() {
 		occupiedSquares = new ArrayList<>();
@@ -24,12 +32,18 @@ public class Ship {
 		switch(kind) {
 			case "MINESWEEPER":
 				size = 2;
+				cqPos = 0;
+				isArmored = false;
 				break;
 			case "DESTROYER":
 				size = 3;
+				cqPos = 1;
+				isArmored = true;
 				break;
 			case "BATTLESHIP":
 				size = 4;
+				cqPos = 2;
+				isArmored = true;
 				break;
 		}
 	}
@@ -39,13 +53,21 @@ public class Ship {
 	}
 
 	public void place(char col, int row, boolean isVertical) {
+	    Square temp;
 		for (int i=0; i<size; i++) {
-			if (isVertical) {
-				occupiedSquares.add(new Square(row+i, col));
-			} else {
-				occupiedSquares.add(new Square(row, (char) (col + i)));
-			}
-		}
+            if (isVertical) {
+                temp = new Square(row + i, col);
+
+            } else {
+                temp = new Square(row, (char) (col + i));
+            }
+            if(i == this.cqPos) {
+                CQuarters = temp;
+                CQuarters.setCQ(true);
+            }
+            this.occupiedSquares.add(temp);
+        }
+
 	}
 
 	public boolean overlaps(Ship other) {
@@ -70,13 +92,40 @@ public class Ship {
 			return new Result(attackedLocation);
 		}
 		var attackedSquare = square.get();
-		if (attackedSquare.isHit()) {
-			var result = new Result(attackedLocation);
-			result.setResult(AttackStatus.INVALID);
-			return result;
-		}
+//		if (attackedSquare.isHit()) {
+//			var result = new Result(attackedLocation);
+//			result.setResult(AttackStatus.INVALID);
+//			return result;
+//		}
+        var result = new Result(attackedLocation);
+        if (attackedSquare.getCQ())
+        {
+            if (!this.isArmored && !this.isSunk())
+            {
+                getOccupiedSquares().forEach( elem -> elem.hit());
+                result.setShip(this);
+                result.setResult(AttackStatus.SUNK);
+                return result;
+            }
+            else if (this.isSunk())
+            {
+                result.setResult(AttackStatus.INVALID);
+                return result;
+            }
+            else
+            {
+                this.isArmored = false;
+                result.setShip(this);
+                result.setResult(AttackStatus.MISS);
+                return result;
+            }
+        }
+        if (attackedSquare.isHit() && !attackedSquare.getCQ()) {
+            result.setResult(AttackStatus.INVALID);
+            return result;
+        }
 		attackedSquare.hit();
-		var result = new Result(attackedLocation);
+//		var result = new Result(attackedLocation);
 		result.setShip(this);
 		if (isSunk()) {
 			result.setResult(AttackStatus.SUNK);
