@@ -49,11 +49,9 @@ public class Game {
         return true;
     }
 
-    public List<Result> ping(int x, char y) {
-        var listp =  opponentsBoard.getPingedList(new Square(x, y));
+    public Boolean ping(int x, char y) {
+        return opponentsBoard.getPingedList(new Square(x, y));
 
-        listp.forEach(q -> System.out.println(q.getLocation().toString()));
-        return listp;
     }
 
     private char randCol() {

@@ -41,8 +41,9 @@ public class Ship {
 	public void place(char col, int row, boolean isVertical) {
 		for (int i=0; i<size; i++) {
 			if (isVertical) {
-				occupiedSquares.add(new Square(row+i, col));
-			} else {
+				occupiedSquares.add(new Square(row + i, col));
+			}
+			 else {
 				occupiedSquares.add(new Square(row, (char) (col + i)));
 			}
 		}
