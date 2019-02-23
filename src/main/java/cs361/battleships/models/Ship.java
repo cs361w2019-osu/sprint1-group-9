@@ -4,9 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.collect.Sets;
 
-//import java.util.ArrayList;
-//import java.util.List;
-//import java.util.Set;
 import java.util.*;
 
 public class Ship {
@@ -15,12 +12,9 @@ public class Ship {
 	@JsonProperty private List<Square> occupiedSquares;
 	@JsonProperty private int size;
 	@JsonIgnore   private int cqPos;
-
     @JsonProperty private Square CQuarters;
     @JsonProperty private boolean isArmored;
 
-    //@JsonProperty private boolean cap = false;
-    //@JsonProperty private int health = 0;
 
 	public Ship() {
 		occupiedSquares = new ArrayList<>();
@@ -92,11 +86,6 @@ public class Ship {
 			return new Result(attackedLocation);
 		}
 		var attackedSquare = square.get();
-//		if (attackedSquare.isHit()) {
-//			var result = new Result(attackedLocation);
-//			result.setResult(AttackStatus.INVALID);
-//			return result;
-//		}
         var result = new Result(attackedLocation);
         if (attackedSquare.getCQ())
         {
@@ -125,7 +114,6 @@ public class Ship {
             return result;
         }
 		attackedSquare.hit();
-//		var result = new Result(attackedLocation);
 		result.setShip(this);
 		if (isSunk()) {
 			result.setResult(AttackStatus.SUNK);
