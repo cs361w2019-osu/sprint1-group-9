@@ -54,6 +54,27 @@ public class Board {
 		return attackResult;
 	}
 
+	public void moveShip(String sn, int direction) {
+
+		// find the ship
+		System.out.println("Looking for ship " + sn);
+
+		//var ship = ships.stream().filter(s -> s.getKind() == sn).findFirst().orElse(null);
+
+		ShipBase ship = null;
+		for (ShipBase s : ships) {
+			System.out.println("Name: " + s.getKind());
+			if(s.getKind().equals(sn)) {
+				ship = s;
+				break;
+			}
+		}
+
+		System.out.println("Ship: " + ship.getKind());
+
+		//move it
+		ship.move(direction);
+	}
 
 
 	private boolean isCQ(Square pos) {

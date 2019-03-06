@@ -38,6 +38,17 @@ public class ApplicationController {
         }
     }
 
+    public Result moveShip(Context context, MoveShipGameAction g) {
+        ShipBase ship = ShipUtility.createShip(g.getShipType());
+        System.out.println("Got Request!");
+        boolean result = Game.getInstance().moveShip(ship, g.getDirection());
+        if (result) {
+            return Results.json().render(Game.getInstance());
+        } else {
+            return Results.badRequest();
+        }
+    }
+
     public Result ping(Context context, AttackGameAction g) {
         var result = Game.getInstance().ping(g.getActionRow(), g.getActionColumn());
         if (result) {

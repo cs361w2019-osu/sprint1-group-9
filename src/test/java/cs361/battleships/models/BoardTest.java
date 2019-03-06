@@ -2,6 +2,7 @@ package cs361.battleships.models;
 
 import cs361.battleships.models.Ships.BasicShip;
 import cs361.battleships.models.Ships.ShipBase;
+import cs361.battleships.models.Ships.ShipUtility;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -84,5 +85,19 @@ public class BoardTest {
         assertTrue(board.placeShip(new BasicShip("DESTROYER"), 6, 'A', false));
         assertFalse(board.placeShip(new BasicShip("DESTROYER"), 8, 'A', false));
 
+    }
+
+    @Test
+    public void testMoveShip() {
+
+        board.placeShip(new BasicShip("DESTROYER"), 1, 'A', false);
+        board.placeShip(new BasicShip("MINESWEEPER"), 5, 'D', false);
+        board.placeShip(new BasicShip("BATTLESHIP"), 1, 'H', true);
+        board.moveShip("MINESWEEPER", ShipUtility.MOVE_UP);
+        var ship = board.getShips().get(1);
+        assertTrue(ship.getOccupiedSquares().get(0).getColumn() == 'D');
+        assertTrue(ship.getOccupiedSquares().get(0).getRow() == 4);
+        assertTrue(ship.getOccupiedSquares().get(1).getColumn() == 'E');
+        assertTrue(ship.getOccupiedSquares().get(1).getRow() == 4);
     }
 }

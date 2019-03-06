@@ -21,15 +21,16 @@ public class Square {
 
 	public boolean getCQ(){ return cap;}
     public void setCQ(boolean s) { cap = s; }
-//
 
 	public char getColumn() {
 		return column;
 	}
-
 	public int getRow() {
 		return row;
 	}
+
+	public void setColumn(char column) {this.column = column;}
+	public void setRow(int row) {this.row = row;}
 
 
 	@Override

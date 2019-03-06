@@ -13,6 +13,9 @@ import java.util.List;
 import java.util.Set;
 
 public abstract class ShipBase {
+
+
+
     @JsonProperty protected String kind;
     @JsonProperty protected List<Square> occupiedSquares;
     @JsonProperty protected Square CQuarters;
@@ -22,6 +25,25 @@ public abstract class ShipBase {
     public List<Square> getOccupiedSquares() {
         return occupiedSquares;
     }
+
+
+    public void move(int direction) {
+        switch (direction) {
+            case ShipUtility.MOVE_UP:
+                occupiedSquares.forEach(s -> moveVertically(s, -1));
+                break;
+            case ShipUtility.MOVE_DOWN:
+                occupiedSquares.forEach(s -> moveVertically(s, 1));
+                break;
+            case ShipUtility.MOVE_RIGHT:
+                occupiedSquares.forEach(s -> moveHorizontally(s, 1));
+                break;
+            case ShipUtility.MOVE_LEFT:
+                occupiedSquares.forEach(s -> moveHorizontally(s, -1));
+                break;
+        }
+    }
+
 
     public boolean overlaps(ShipBase other) {
         Set<Square> thisSquares = Set.copyOf(getOccupiedSquares());
@@ -40,6 +62,20 @@ public abstract class ShipBase {
 
     public abstract Result attack(int x, char y);
     public abstract void place(char col, int row, boolean isVertical);
+
+
+
+    private void moveVertically(Square position, int modifier) {
+        var row = position.getRow();
+        position.setRow(position.getRow() + modifier);
+    }
+
+    private void moveHorizontally(Square position, int modifier) {
+        int col = (int)(position.getColumn());
+        char new_pos = (char)(col + modifier);
+        position.setColumn(new_pos);
+    }
+
 
     @JsonIgnore
     public boolean isSunk() {
