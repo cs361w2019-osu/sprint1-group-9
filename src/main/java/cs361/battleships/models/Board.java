@@ -1,6 +1,9 @@
 package cs361.battleships.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import cs361.battleships.models.Ships.BasicShip;
+import cs361.battleships.models.Ships.ShipBase;
+import cs361.battleships.models.Ships.ShipUtility;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +11,7 @@ import java.util.stream.Collectors;
 
 public class Board {
 
-	@JsonProperty private List<Ship> ships;
+	@JsonProperty private List<ShipBase> ships;
 	@JsonProperty private List<Result> attacks;
 	@JsonProperty private List<Result> pings;
 	@JsonProperty private int pingsLeft;
@@ -25,14 +28,12 @@ public class Board {
 	/*
 	DO NOT change the signature of this method. It is used by the grading scripts.
 	 */
-	public boolean placeShip(Ship ship, int x, char y, boolean isVertical) {
-		if (ships.size() >= 3) {
-			return false;
-		}
+	public boolean placeShip(ShipBase ship, int x, char y, boolean isVertical) {
+
 		if (ships.stream().anyMatch(s -> s.getKind().equals(ship.getKind()))) {
 			return false;
 		}
-		final var placedShip = new Ship(ship.getKind());
+		final var placedShip = ShipUtility.createShip(ship.getKind());
 		placedShip.place(y, x, isVertical);
 		if (ships.stream().anyMatch(s -> s.overlaps(placedShip))) {
 			return false;
@@ -84,7 +85,7 @@ public class Board {
 	}
 
 
-	List<Ship> getShips() {
+	List<ShipBase> getShips() {
 		return ships;
 	}
 

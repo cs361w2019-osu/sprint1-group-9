@@ -1,12 +1,13 @@
 package cs361.battleships.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import cs361.battleships.models.Ships.ShipBase;
 
 public class Result {
 
 	@JsonProperty private AttackStatus result;
 	@JsonProperty private Square location;
-	@JsonProperty private Ship ship;
+	@JsonProperty private ShipBase ship;
 
 	@SuppressWarnings("unused")
 	public Result() {
@@ -25,11 +26,11 @@ public class Result {
 		this.result = result;
 	}
 
-	public Ship getShip() {
+	public ShipBase getShip() {
 		return ship;
 	}
 
-	public void setShip(Ship ship) {
+	public void setShip(ShipBase ship) {
 		this.ship = ship;
 	}
 

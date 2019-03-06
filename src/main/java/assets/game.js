@@ -137,7 +137,7 @@ function cellClick() {
     let row = this.parentNode.rowIndex;
     let col = String.fromCharCode(this.cellIndex + 64);
     if (isSetup) {
-        sendXhr("POST", "/place", {game: game, shipType: shipType, x: row, y: col, isVertical: vertical}, function(data) {
+        sendXhr("POST", "/place", { shipType: shipType, x: row, y: col, isVertical: vertical}, function(data) {
             game = data;
             redrawGrid();
             placedShips++;
@@ -148,13 +148,13 @@ function cellClick() {
         });
     } else if(ping) {
         ping = false;
-        sendXhr("POST", "/ping", {game: game, x: row, y: col}, function(data) {
+        sendXhr("POST", "/ping", { x: row, y: col}, function(data) {
             game = data;
             pingBoard(data.opponentsBoard.pings);
         });
 
     } else {
-        sendXhr("POST", "/attack", {game: game, x: row, y: col}, function(data) {
+        sendXhr("POST", "/attack", { x: row, y: col}, function(data) {
             game = data;
             redrawGrid();
         })
