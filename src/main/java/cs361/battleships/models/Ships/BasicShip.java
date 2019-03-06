@@ -102,7 +102,6 @@ public class BasicShip extends ShipBase {
                 CQuarters = temp;
                 CQuarters.setCQ(true);
             }
-            System.out.println("Adding square..");
             this.occupiedSquares.add(temp);
         }
     }
