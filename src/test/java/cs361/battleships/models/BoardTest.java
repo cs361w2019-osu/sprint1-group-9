@@ -100,4 +100,13 @@ public class BoardTest {
         assertTrue(ship.getOccupiedSquares().get(1).getColumn() == 'E');
         assertTrue(ship.getOccupiedSquares().get(1).getRow() == 4);
     }
+
+    @Test
+    public void testMoveShipError() {
+        board.placeShip(new BasicShip("MINESWEEPER"), 1, 'A', false);
+        board.placeShip(new BasicShip("DESTROYER"), 5, 'D', false);
+        board.placeShip(new BasicShip("BATTLESHIP"), 1, 'H', true);
+        board.moveShip("MINESWEEPER", ShipUtility.MOVE_UP);
+        assertFalse(board.moveShip("MINESWEEPER", ShipUtility.MOVE_UP));
+    }
 }

@@ -3,6 +3,7 @@ package cs361.battleships.models.Ships;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import cs361.battleships.models.AttackStatus;
+import cs361.battleships.models.Game;
 import cs361.battleships.models.Result;
 import cs361.battleships.models.Square;
 import com.google.common.collect.Sets;
@@ -27,21 +28,19 @@ public abstract class ShipBase {
     }
 
 
-    public void move(int direction) {
+    public boolean move(int direction) {
+
         switch (direction) {
             case ShipUtility.MOVE_UP:
-                occupiedSquares.forEach(s -> moveVertically(s, -1));
-                break;
+                return moveVertically(-1);
             case ShipUtility.MOVE_DOWN:
-                occupiedSquares.forEach(s -> moveVertically(s, 1));
-                break;
+                return moveVertically(-1);
             case ShipUtility.MOVE_RIGHT:
-                occupiedSquares.forEach(s -> moveHorizontally(s, 1));
-                break;
+                return moveHorizontally(1);
             case ShipUtility.MOVE_LEFT:
-                occupiedSquares.forEach(s -> moveHorizontally(s, -1));
-                break;
+                return moveHorizontally(-1);
         }
+        return false;
     }
 
 
@@ -64,16 +63,40 @@ public abstract class ShipBase {
     public abstract void place(char col, int row, boolean isVertical);
 
 
+    private boolean moveVertically(int modifier) {
+        var newRows = new ArrayList<Integer>();
+        int row;
 
-    private void moveVertically(Square position, int modifier) {
-        var row = position.getRow();
-        position.setRow(position.getRow() + modifier);
+        // make the potential new rows
+        for (Square pos : occupiedSquares) {
+            row = pos.getRow() + modifier;
+            if(row < 0 || row > Game.BOARD_SIZE) {
+                return false;
+            }
+            newRows.add(row);
+        }
+
+        //move them over
+        occupiedSquares.forEach(s -> s.setRow(newRows.remove(0)));
+        return true;
     }
 
-    private void moveHorizontally(Square position, int modifier) {
-        int col = (int)(position.getColumn());
-        char new_pos = (char)(col + modifier);
-        position.setColumn(new_pos);
+    private boolean moveHorizontally(int modifier) {
+        var newCols = new ArrayList<Integer>();
+        int col;
+
+        // make the potential new rows
+        for (Square pos : occupiedSquares) {
+            col = (int)pos.getColumn() + modifier;
+            if(col < 65 || col > (Game.BOARD_SIZE + 64)) {
+                return false;
+            }
+            newCols.add(col);
+        }
+
+        //move them over
+        occupiedSquares.forEach(s -> s.setColumn( (char)(int)(newCols.remove(0))));
+        return true;
     }
 
 

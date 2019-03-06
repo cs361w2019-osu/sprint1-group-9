@@ -13,6 +13,7 @@ public class Game {
 
     @JsonIgnore private static Game instance;
 
+
     private Game() {
         playersBoard = new Board();
         opponentsBoard = new Board();
@@ -25,6 +26,7 @@ public class Game {
         return instance;
     }
 
+    public static final int BOARD_SIZE = 10;
 
     @JsonProperty private Board playersBoard;
     @JsonProperty private Board opponentsBoard;
@@ -85,12 +87,12 @@ public class Game {
     }
 
     private char randCol() {
-        int random = new Random().nextInt(10);
+        int random = new Random().nextInt(BOARD_SIZE);
         return (char) ('A' + random);
     }
 
     private int randRow() {
-        return  new Random().nextInt(10) + 1;
+        return  new Random().nextInt(BOARD_SIZE) + 1;
     }
 
     private boolean randVertical() {

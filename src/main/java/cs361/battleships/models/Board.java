@@ -54,13 +54,19 @@ public class Board {
 		return attackResult;
 	}
 
-	public void moveShip(String name, int direction) {
+	public boolean moveShip(String name, int direction) {
 
 		// find the ship
 		var ship = ships.stream().filter(s -> s.getKind().equals(name)).findFirst().orElse(null);
 
+		// test if moveable
+		if(ship.isSunk()) {
+			return false;
+		}
+
 		//move it
-		ship.move(direction);
+		return ship.move(direction);
+
 	}
 
 
@@ -108,8 +114,8 @@ public class Board {
 	 ********************************************************************/
 
 	public void checkAndAppend(int temp1, char temp2) {
-		if (temp1 >= 1 && temp1 <= 10){
-			if (temp2 >= 'A' && temp2 <= 'J'){
+		if (temp1 >= 1 && temp1 <= Game.BOARD_SIZE){
+			if (temp2 >= 'A' && temp2 <= (char)(64 + Game.BOARD_SIZE)){
 
 				boolean rep = false;
 
