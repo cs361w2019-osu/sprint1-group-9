@@ -1,6 +1,8 @@
 package cs361.battleships.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import cs361.battleships.models.Ships.ShipBase;
 
 import java.util.List;
 import java.util.Random;
@@ -9,13 +11,30 @@ import static cs361.battleships.models.AttackStatus.*;
 
 public class Game {
 
-    @JsonProperty private Board playersBoard = new Board();
-    @JsonProperty private Board opponentsBoard = new Board();
+    @JsonIgnore private static Game instance;
+
+    private Game() {
+        playersBoard = new Board();
+        opponentsBoard = new Board();
+    }
+
+    public static Game getInstance() {
+        if(instance == null) {
+            instance = new Game();
+        }
+        return instance;
+    }
+
+
+    @JsonProperty private Board playersBoard;
+    @JsonProperty private Board opponentsBoard;
+
+
 
     /*
 	DO NOT change the signature of this method. It is used by the grading scripts.
 	 */
-    public boolean placeShip(Ship ship, int x, char y, boolean isVertical) {
+    public boolean placeShip(ShipBase ship, int x, char y, boolean isVertical) {
         boolean successful = playersBoard.placeShip(ship, x, y, isVertical);
         if (!successful)
             return false;
