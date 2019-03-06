@@ -16,6 +16,7 @@ public class ApplicationController {
     }
 
     public Result newGame() {
+        Game.getInstance().reset();
         return Results.json().render(Game.getInstance());
     }
 
@@ -39,9 +40,7 @@ public class ApplicationController {
     }
 
     public Result moveShip(Context context, MoveShipGameAction g) {
-        ShipBase ship = ShipUtility.createShip(g.getShipType());
-        System.out.println("Got Request!");
-        boolean result = Game.getInstance().moveShip(ship, g.getDirection());
+        boolean result = Game.getInstance().moveShip(g.getShipType(), g.getDirection());
         if (result) {
             return Results.json().render(Game.getInstance());
         } else {

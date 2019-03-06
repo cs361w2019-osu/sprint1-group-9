@@ -69,15 +69,19 @@ public class Game {
     }
 
 
-    public boolean moveShip(ShipBase ship, int direction) {
-        System.out.println("Got shiptype: " + ship.getKind());
-        playersBoard.moveShip(ship.getKind(), direction);
+    public boolean moveShip(String shipName, int direction) {
+        playersBoard.moveShip(shipName, direction);
         return true;
     }
 
-    public Boolean ping(int x, char y) {
+    public boolean ping(int x, char y) {
         return opponentsBoard.getPingedList(new Square(x, y));
 
+    }
+
+    public void reset() {
+        playersBoard = new Board();
+        opponentsBoard = new Board();
     }
 
     private char randCol() {
