@@ -71,7 +71,7 @@ public class Game {
     }
 
 
-    public boolean moveShip(String shipName, int direction) {
+    public boolean moveShip(String shipName, MoveDirection direction) {
         playersBoard.moveShip(shipName, direction);
         return true;
     }

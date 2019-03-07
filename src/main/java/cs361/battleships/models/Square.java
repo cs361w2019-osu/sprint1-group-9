@@ -48,7 +48,7 @@ public class Square {
 
 	@JsonIgnore
 	public boolean isOutOfBounds() {
-		return row > 10 || row < 1 || column > 'J' || column < 'A';
+		return row > Game.BOARD_SIZE || row < 1 || column > (char)(64 + Game.BOARD_SIZE) || column < 'A';
 	}
 
 	public boolean isHit() {

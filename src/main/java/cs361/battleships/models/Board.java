@@ -54,7 +54,68 @@ public class Board {
 		return attackResult;
 	}
 
-	public boolean moveShip(String name, int direction) {
+
+	private boolean move(ShipBase ship, MoveDirection direction) {
+
+		switch (direction) {
+			case UP:
+				return moveVertically(ship,-1);
+			case DOWN:
+				return moveVertically(ship,-1);
+			case RIGHT:
+				return moveHorizontally(ship,1);
+			case LEFT:
+				return moveHorizontally(ship,-1);
+		}
+		return false;
+	}
+
+	private boolean isShip(Square pos) {
+		return ships.stream().anyMatch(ship ->
+				ship.getOccupiedSquares().stream().anyMatch( s ->
+						s.equals(pos)));
+	}
+
+	private boolean moveVertically(ShipBase ship, int modifier) {
+		var newRows = new ArrayList<Integer>();
+		int row;
+
+		// make the potential new rows
+		for (Square pos : ship.getOccupiedSquares()) {
+			row = pos.getRow() + modifier;
+			if(row < 0 || row > Game.BOARD_SIZE) {
+				return false;
+			}
+			newRows.add(row);
+		}
+
+		//move them over
+		ship.getOccupiedSquares().forEach(s -> s.setRow(newRows.remove(0)));
+		return true;
+	}
+
+	private boolean moveHorizontally(ShipBase ship, int modifier) {
+		var newCols = new ArrayList<Integer>();
+		int col;
+
+		// make the potential new rows
+		for (Square pos : ship.getOccupiedSquares()) {
+			col = (int)pos.getColumn() + modifier;
+			if(col < 65 || col > (Game.BOARD_SIZE + 64)) {
+				return false;
+			}
+			if(isShip(pos)) {
+				return false;
+			}
+			newCols.add(col);
+		}
+
+		//move them over
+		ship.getOccupiedSquares().forEach(s -> s.setColumn( (char)(int)(newCols.remove(0))));
+		return true;
+	}
+
+	public boolean moveShip(String name, MoveDirection direction) {
 
 		// find the ship
 		var ship = ships.stream().filter(s -> s.getKind().equals(name)).findFirst().orElse(null);
@@ -65,8 +126,7 @@ public class Board {
 		}
 
 		//move it
-		return ship.move(direction);
-
+		return move(ship, direction);
 	}
 
 
@@ -132,15 +192,9 @@ public class Board {
 				//	System.out.println("Coordinates within range.\n");
 					Square pingPos = new Square(temp1, temp2);
 
-
-					var ishit = ships.stream().anyMatch(ship ->
-						ship.getOccupiedSquares().stream().anyMatch( s ->
-								s.equals(pingPos)));
-
-
 					Result r = new Result(pingPos);
 
-					if(ishit) {
+					if(isShip(pingPos)) {
 						r.setResult(AttackStatus.HIT);
 					} else {
 						r.setResult(AttackStatus.MISS);

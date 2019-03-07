@@ -27,23 +27,6 @@ public abstract class ShipBase {
         return occupiedSquares;
     }
 
-
-    public boolean move(int direction) {
-
-        switch (direction) {
-            case ShipUtility.MOVE_UP:
-                return moveVertically(-1);
-            case ShipUtility.MOVE_DOWN:
-                return moveVertically(-1);
-            case ShipUtility.MOVE_RIGHT:
-                return moveHorizontally(1);
-            case ShipUtility.MOVE_LEFT:
-                return moveHorizontally(-1);
-        }
-        return false;
-    }
-
-
     public boolean overlaps(ShipBase other) {
         Set<Square> thisSquares = Set.copyOf(getOccupiedSquares());
         Set<Square> otherSquares = Set.copyOf(other.getOccupiedSquares());
@@ -62,42 +45,6 @@ public abstract class ShipBase {
     public abstract Result attack(int x, char y);
     public abstract void place(char col, int row, boolean isVertical);
 
-
-    private boolean moveVertically(int modifier) {
-        var newRows = new ArrayList<Integer>();
-        int row;
-
-        // make the potential new rows
-        for (Square pos : occupiedSquares) {
-            row = pos.getRow() + modifier;
-            if(row < 0 || row > Game.BOARD_SIZE) {
-                return false;
-            }
-            newRows.add(row);
-        }
-
-        //move them over
-        occupiedSquares.forEach(s -> s.setRow(newRows.remove(0)));
-        return true;
-    }
-
-    private boolean moveHorizontally(int modifier) {
-        var newCols = new ArrayList<Integer>();
-        int col;
-
-        // make the potential new rows
-        for (Square pos : occupiedSquares) {
-            col = (int)pos.getColumn() + modifier;
-            if(col < 65 || col > (Game.BOARD_SIZE + 64)) {
-                return false;
-            }
-            newCols.add(col);
-        }
-
-        //move them over
-        occupiedSquares.forEach(s -> s.setColumn( (char)(int)(newCols.remove(0))));
-        return true;
-    }
 
 
     @JsonIgnore
