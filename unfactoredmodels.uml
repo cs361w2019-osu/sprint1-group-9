@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>cs361.battleships.models</OriginalElement>
+  <nodes>
+    <node x="135.8686868686869" y="979.0">cs361.battleships.models.Board</node>
+    <node x="180.10407382650035" y="331.0">cs361.battleships.models.Ship</node>
+    <node x="420.3540738265003" y="56.0">cs361.battleships.models.AtackStatus</node>
+    <node x="426.34090909090907" y="1318.0">cs361.battleships.models.Game</node>
+    <node x="340.033626708259" y="749.0">cs361.battleships.models.Result</node>
+    <node x="156.47907382650035" y="0.0">cs361.battleships.models.Square</node>
+    <node x="55.340909090909065" y="1274.0">cs361.battleships.models.BoardTest</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="cs361.battleships.models.Game" target="cs361.battleships.models.AtackStatus">
+      <point x="118.0" y="-92.0" />
+      <point x="691.840909090909" y="1254.0" />
+      <point x="660.8555964052287" y="1254.0" />
+      <point x="660.8555964052287" y="291.0" />
+      <point x="521.1874071598336" y="291.0" />
+      <point x="45.833333333333314" y="69.5" />
+    </edge>
+    <edge source="cs361.battleships.models.Result" target="cs361.battleships.models.Ship">
+      <point x="-46.25" y="-70.0" />
+      <point x="367.783626708259" y="719.0" />
+      <point x="333.5131647355912" y="719.0" />
+      <point x="40.90909090909088" y="159.0" />
+    </edge>
+    <edge source="cs361.battleships.models.Square" target="cs361.battleships.models.Square">
+      <point x="-84.0" y="125.5" />
+      <point x="168.47907382650035" y="271.0" />
+      <point x="136.47907382650035" y="271.0" />
+      <point x="136.47907382650035" y="125.5" />
+      <point x="-96.0" y="-0.0" />
+    </edge>
+    <edge source="cs361.battleships.models.Ship" target="cs361.battleships.models.Result">
+      <point x="61.36363636363626" y="159.0" />
+      <point x="353.9677101901366" y="709.0" />
+      <point x="386.283626708259" y="709.0" />
+      <point x="-27.75" y="-70.0" />
+    </edge>
+    <edge source="cs361.battleships.models.BoardTest" target="cs361.battleships.models.AtackStatus">
+      <point x="137.91666666666663" y="-136.0" />
+      <point x="358.7575757575757" y="1254.0" />
+      <point x="602.840909090909" y="1254.0" />
+      <point x="602.840909090909" y="301.0" />
+      <point x="502.8540738265003" y="301.0" />
+      <point x="27.5" y="69.5" />
+    </edge>
+    <edge source="cs361.battleships.models.Ship" target="cs361.battleships.models.Square">
+      <point x="28.125" y="-159.0" />
+      <point x="320.7290738265003" y="311.0" />
+      <point x="288.4790738265003" y="311.0" />
+      <point x="36.0" y="125.5" />
+    </edge>
+    <edge source="cs361.battleships.models.Game" target="cs361.battleships.models.Board">
+      <point x="-118.0" y="-92.0" />
+      <point x="455.84090909090907" y="1234.0" />
+      <point x="342.3686868686869" y="1234.0" />
+      <point x="59.0" y="92.5" />
+    </edge>
+    <edge source="cs361.battleships.models.Game" target="cs361.battleships.models.Ship">
+      <point x="59.0" y="-92.0" />
+      <point x="632.840909090909" y="1204.0" />
+      <point x="526.0467914438502" y="1204.0" />
+      <point x="526.0467914438502" y="689.0" />
+      <point x="394.8768010992276" y="689.0" />
+      <point x="102.27272727272725" y="159.0" />
+    </edge>
+    <edge source="cs361.battleships.models.Ship" target="cs361.battleships.models.Ship">
+      <point x="-102.27272727272728" y="159.0" />
+      <point x="190.33134655377307" y="669.0" />
+      <point x="160.10407382650035" y="669.0" />
+      <point x="160.10407382650035" y="490.0" />
+      <point x="-112.5" y="-0.0" />
+    </edge>
+    <edge source="cs361.battleships.models.BoardTest" target="cs361.battleships.models.BoardTest">
+      <point x="0.0" y="136.0" />
+      <point x="220.84090909090907" y="1566.0" />
+      <point x="35.340909090909065" y="1566.0" />
+      <point x="35.340909090909065" y="1410.0" />
+      <point x="-165.5" y="-0.0" />
+    </edge>
+    <edge source="cs361.battleships.models.Board" target="cs361.battleships.models.Square">
+      <point x="-131.1111111111111" y="-92.5" />
+      <point x="152.2575757575758" y="959.0" />
+      <point x="26.0" y="959.0" />
+      <point x="26.0" y="291.0" />
+      <point x="192.47907382650035" y="291.0" />
+      <point x="-60.0" y="125.5" />
+    </edge>
+    <edge source="cs361.battleships.models.Result" target="cs361.battleships.models.Square">
+      <point x="9.25" y="-70.0" />
+      <point x="423.283626708259" y="729.0" />
+      <point x="429.39646464646466" y="729.0" />
+      <point x="429.39646464646466" y="301.0" />
+      <point x="312.4790738265003" y="301.0" />
+      <point x="60.0" y="125.5" />
+    </edge>
+    <edge source="cs361.battleships.models.Result" target="cs361.battleships.models.Result">
+      <point x="-61.66666666666667" y="70.0" />
+      <point x="352.36696004159234" y="909.0" />
+      <point x="320.033626708259" y="909.0" />
+      <point x="320.033626708259" y="819.0" />
+      <point x="-74.0" y="-0.0" />
+    </edge>
+    <edge source="cs361.battleships.models.Game" target="cs361.battleships.models.Result">
+      <point x="0.0" y="-92.0" />
+      <point x="573.840909090909" y="1214.0" />
+      <point x="509.1301247771836" y="1214.0" />
+      <point x="509.1301247771836" y="949.0" />
+      <point x="475.70029337492565" y="949.0" />
+      <point x="61.666666666666686" y="70.0" />
+    </edge>
+    <edge source="cs361.battleships.models.Board" target="cs361.battleships.models.Result">
+      <point x="65.55555555555554" y="-92.5" />
+      <point x="348.92424242424244" y="939.0" />
+      <point x="401.70029337492565" y="939.0" />
+      <point x="-12.333333333333314" y="70.0" />
+    </edge>
+    <edge source="cs361.battleships.models.Ship" target="cs361.battleships.models.AtackStatus">
+      <point x="84.375" y="-159.0" />
+      <point x="376.9790738265003" y="311.0" />
+      <point x="429.520740493167" y="311.0" />
+      <point x="-45.83333333333333" y="69.5" />
+    </edge>
+    <edge source="cs361.battleships.models.Board" target="cs361.battleships.models.Board">
+      <point x="-118.0" y="92.5" />
+      <point x="165.3686868686869" y="1184.0" />
+      <point x="115.8686868686869" y="1184.0" />
+      <point x="115.8686868686869" y="1071.5" />
+      <point x="-147.5" y="-0.0" />
+    </edge>
+    <edge source="cs361.battleships.models.Board" target="cs361.battleships.models.Ship">
+      <point x="0.0" y="-92.5" />
+      <point x="283.3686868686869" y="959.0" />
+      <point x="274.1186868686869" y="959.0" />
+      <point x="274.1186868686869" y="729.0" />
+      <point x="292.6040738265003" y="729.0" />
+      <point x="0.0" y="159.0" />
+    </edge>
+    <edge source="cs361.battleships.models.BoardTest" target="cs361.battleships.models.Ship">
+      <point x="-137.91666666666663" y="-136.0" />
+      <point x="82.92424242424244" y="1254.0" />
+      <point x="72.17351827094478" y="1254.0" />
+      <point x="72.17351827094478" y="689.0" />
+      <point x="210.78589200831854" y="689.0" />
+      <point x="-81.81818181818181" y="159.0" />
+    </edge>
+    <edge source="cs361.battleships.models.BoardTest" target="cs361.battleships.models.Board">
+      <point x="-27.583333333333314" y="-136.0" />
+      <point x="193.25757575757575" y="1254.0" />
+      <point x="224.3686868686869" y="1254.0" />
+      <point x="-59.0" y="92.5" />
+    </edge>
+    <edge source="cs361.battleships.models.Result" target="cs361.battleships.models.AtackStatus">
+      <point x="64.75" y="-70.0" />
+      <point x="478.783626708259" y="719.0" />
+      <point x="462.39646464646466" y="719.0" />
+      <point x="462.39646464646466" y="311.0" />
+      <point x="466.1874071598337" y="311.0" />
+      <point x="-9.166666666666657" y="69.5" />
+    </edge>
+    <edge source="cs361.battleships.models.BoardTest" target="cs361.battleships.models.Result">
+      <point x="82.75" y="-136.0" />
+      <point x="303.59090909090907" y="1244.0" />
+      <point x="457.86696004159234" y="1244.0" />
+      <point x="457.86696004159234" y="949.0" />
+      <point x="451.033626708259" y="949.0" />
+      <point x="37.0" y="70.0" />
+    </edge>
+    <edge source="cs361.battleships.models.Game" target="cs361.battleships.models.Game">
+      <point x="0.0" y="92.0" />
+      <point x="573.840909090909" y="1522.0" />
+      <point x="406.34090909090907" y="1522.0" />
+      <point x="406.34090909090907" y="1410.0" />
+      <point x="-147.5" y="-0.0" />
+    </edge>
+    <edge source="cs361.battleships.models.Board" target="cs361.battleships.models.AtackStatus">
+      <point x="131.1111111111111" y="-92.5" />
+      <point x="414.479797979798" y="959.0" />
+      <point x="591.840909090909" y="959.0" />
+      <point x="591.840909090909" y="311.0" />
+      <point x="484.520740493167" y="311.0" />
+      <point x="9.166666666666686" y="69.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.457124842370744" x="361.0" y="783.0" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+    <Category>Inner Classes</Category>
+    <Category>Fields</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
