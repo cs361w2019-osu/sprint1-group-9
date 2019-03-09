@@ -30,6 +30,7 @@ public class Game {
 
     @JsonProperty private Board playersBoard;
     @JsonProperty private Board opponentsBoard;
+    @JsonProperty private boolean isLaserAvailable = false;
 
 
 

@@ -148,9 +148,15 @@ function cellClick() {
         });
     } else if(ping) {
         ping = false;
+        /*
         sendXhr("POST", "/ping", { x: row, y: col}, function(data) {
             game = data;
             pingBoard(data.opponentsBoard.pings);
+        });
+        */
+        sendXhr("POST", "/move", { shipType: "MINESWEEPER", direction: "UP"}, function(data) {
+            game = data;
+            redrawGrid();
         });
 
     } else {
