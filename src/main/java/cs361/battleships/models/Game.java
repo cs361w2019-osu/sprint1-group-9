@@ -13,6 +13,7 @@ public class Game {
 
     @JsonIgnore private static Game instance;
 
+
     private Game() {
         playersBoard = new Board();
         opponentsBoard = new Board();
@@ -25,9 +26,11 @@ public class Game {
         return instance;
     }
 
+    public static final int BOARD_SIZE = 10;
 
     @JsonProperty private Board playersBoard;
     @JsonProperty private Board opponentsBoard;
+    @JsonProperty private boolean isLaserAvailable = false;
 
 
 
@@ -68,18 +71,37 @@ public class Game {
         return true;
     }
 
-    public Boolean ping(int x, char y) {
+    public boolean getIsLaserAvailable() {
+        return isLaserAvailable;
+    }
+
+    public void setIsLaserAvailable(boolean val) {
+        isLaserAvailable = val;
+    }
+
+
+    public boolean moveShip(String shipName, MoveDirection direction) {
+        playersBoard.moveShip(shipName, direction);
+        return true;
+    }
+
+    public boolean ping(int x, char y) {
         return opponentsBoard.getPingedList(new Square(x, y));
 
     }
 
+    public void reset() {
+        playersBoard = new Board();
+        opponentsBoard = new Board();
+    }
+
     private char randCol() {
-        int random = new Random().nextInt(10);
+        int random = new Random().nextInt(BOARD_SIZE);
         return (char) ('A' + random);
     }
 
     private int randRow() {
-        return  new Random().nextInt(10) + 1;
+        return  new Random().nextInt(BOARD_SIZE) + 1;
     }
 
     private boolean randVertical() {

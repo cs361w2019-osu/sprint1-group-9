@@ -16,6 +16,7 @@ public class ApplicationController {
     }
 
     public Result newGame() {
+        Game.getInstance().reset();
         return Results.json().render(Game.getInstance());
     }
 
@@ -31,6 +32,15 @@ public class ApplicationController {
 
     public Result attack(Context context, AttackGameAction g) {
         boolean result = Game.getInstance().attack(g.getActionRow(), g.getActionColumn());
+        if (result) {
+            return Results.json().render(Game.getInstance());
+        } else {
+            return Results.badRequest();
+        }
+    }
+
+    public Result moveShip(Context context, MoveShipGameAction g) {
+        boolean result = Game.getInstance().moveShip(g.getShipType(), g.getDirection());
         if (result) {
             return Results.json().render(Game.getInstance());
         } else {

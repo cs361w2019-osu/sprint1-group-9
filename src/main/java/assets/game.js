@@ -4,6 +4,22 @@ var game;
 var shipType;
 var vertical;
 var ping = false;
+var laserCheck = false;
+
+function laserAlert()
+{
+    if (game.isLaserAvailable == true && laserCheck == false)
+    {
+        alert("ACTIVATION CODE RECEIVED.\n\n SPACE LASER: ENGAGED.");
+        laserCheck = true;
+        return;
+    }
+}
+
+var moveShips = {
+    direction: "NULL",
+    pressed: false
+};
 
 function makeGrid(table, isPlayer) {
     // add colmn header
@@ -71,6 +87,7 @@ function markHits(board, elementId, surrenderText) {
             className = "hit";
         else if (attack.result === "SUNK") {
             sinkShip(board, elementId, attack);
+            laserAlert();
             return;
         }
         else if (attack.result === "SURRENDER") {
@@ -148,12 +165,27 @@ function cellClick() {
         });
     } else if(ping) {
         ping = false;
+        /*
         sendXhr("POST", "/ping", { x: row, y: col}, function(data) {
             game = data;
             pingBoard(data.opponentsBoard.pings);
         });
+        */
+        sendXhr("POST", "/move", { shipType: "MINESWEEPER", direction: "UP"}, function(data) {
+            game = data;
+            redrawGrid();
+        });
 
-    } else {
+    } else if((moveShips.pressed == true)){
+              sendXhr("POST", "/move", {shipType: shipType, direction: moveShips.direction}, function(data) {
+                  game = data;
+                  moveShips.direction = "NULL";
+                  moveShips.pressed = false;
+                   redrawGrid();
+              });
+
+
+     }else {
         sendXhr("POST", "/attack", { x: row, y: col}, function(data) {
             game = data;
             redrawGrid();
@@ -220,6 +252,23 @@ function initGame() {
     document.getElementById("ping-button").addEventListener("click", function(e) {
         ping = true;
     });
+    document.getElementById("move-north").addEventListener("click", function(e) {
+        moveShips.direction = "UP";
+        moveShips.pressed = true;
+    });
+    document.getElementById("move-south").addEventListener("click", function(e) {
+        moveShips.direction = "DOWN";
+        moveShips.pressed = true;
+    });
+    document.getElementById("move-west").addEventListener("click", function(e) {
+        moveShips.direction = "LEFT";
+        moveShips.pressed = true;
+    });
+    document.getElementById("move-east").addEventListener("click", function(e) {
+        moveShips.direction = "RIGHT";
+        moveShips.pressed = true;
+    });
+
     sendXhr("GET", "/game", {}, function(data) {
         game = data;
     });

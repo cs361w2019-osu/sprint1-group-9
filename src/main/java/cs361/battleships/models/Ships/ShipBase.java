@@ -3,6 +3,7 @@ package cs361.battleships.models.Ships;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import cs361.battleships.models.AttackStatus;
+import cs361.battleships.models.Game;
 import cs361.battleships.models.Result;
 import cs361.battleships.models.Square;
 import com.google.common.collect.Sets;
@@ -13,6 +14,9 @@ import java.util.List;
 import java.util.Set;
 
 public abstract class ShipBase {
+
+
+
     @JsonProperty protected String kind;
     @JsonProperty protected List<Square> occupiedSquares;
     @JsonProperty protected Square CQuarters;
@@ -40,6 +44,8 @@ public abstract class ShipBase {
 
     public abstract Result attack(int x, char y);
     public abstract void place(char col, int row, boolean isVertical);
+
+
 
     @JsonIgnore
     public boolean isSunk() {
