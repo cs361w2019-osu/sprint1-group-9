@@ -1,15 +1,12 @@
 package cs361.battleships.models.Ships;
 
-public class ShipUtility {
+import cs361.battleships.models.Submarine;
 
-    public static final int MOVE_UP = 1;
-    public static final int MOVE_DOWN = 2;
-    public static final int MOVE_LEFT = 3;
-    public static final int MOVE_RIGHT = 4;
+public class ShipUtility {
 
     public static ShipBase createShip(String kind) {
         if(kind == "Submarine") {
-            return null;
+            return new Submarine();
         }
         return new BasicShip(kind);
     }

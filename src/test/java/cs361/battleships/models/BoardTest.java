@@ -71,11 +71,12 @@ public class BoardTest {
         assertEquals(AttackStatus.SURRENDER, result.getResult());
     }
 
-    @Test
-    public void testPlaceMultipleShipsOfSameType() {
-        assertTrue(board.placeShip(new BasicShip("MINESWEEPER"), 1, 'A', true));
-        assertFalse(board.placeShip(new BasicShip("MINESWEEPER"), 5, 'D', true));
 
+
+    @Test
+    public void testPlaceSubmarine() {
+        assertTrue(board.placeShip(new BasicShip("MINESWEEPER"), 1, 'A', true));
+        assertTrue(board.placeShip(ShipUtility.createShip("SUBMARINE"), 5, 'D', true));
     }
 
     @Test

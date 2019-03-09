@@ -1,50 +1,20 @@
-package cs361.battleships.models.Ships;
+package cs361.battleships.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import cs361.battleships.models.AttackStatus;
-import cs361.battleships.models.Result;
-import cs361.battleships.models.Square;
+import cs361.battleships.models.Ships.BasicShip;
+import cs361.battleships.models.Ships.ShipBase;
+import cs361.battleships.models.Ships.ShipUtility;
 
-import java.util.ArrayList;
+public class Submarine extends BasicShip {
 
-public class BasicShip extends ShipBase {
-
+    private boolean submerged;
     private boolean isArmored;
-    private int cqPos;
 
-
-    public BasicShip() {
-        occupiedSquares = new ArrayList<>();
+    public Submarine (){
+        this.kind = "SUBMARINE";
+        this.isArmored = true;
     }
 
-    public BasicShip(String kind) {
-        this();
-        this.kind = kind;
-        switch(kind) {
-            case "MINESWEEPER":
-                size = 2;
-                cqPos = 0;
-                isArmored = false;
-                break;
-            case "DESTROYER":
-                size = 3;
-                cqPos = 1;
-                isArmored = true;
-                break;
-            case "BATTLESHIP":
-                size = 4;
-                cqPos = 2;
-                isArmored = true;
-                break;
-            case "SUBMARINE":
-                size = 5;
-                cqPos = 4;
-                isArmored = true;
-                break;
-        }
-    }
-
-
+    @Override
     public Result attack(int x, char y) {
         var attackedLocation = new Square(x, y);
         var square = getOccupiedSquares().stream().filter(s -> s.equals(attackedLocation)).findFirst();
@@ -96,18 +66,34 @@ public class BasicShip extends ShipBase {
 
     public void place(char col, int row, boolean isVertical) {
         Square temp;
-        for (int i=0; i<size; i++) {
+        for (int i=0; i<4; i++) {
             if (isVertical) {
                 temp = new Square(row + i, col);
+                if(i == 2) {
+                    this.occupiedSquares.add(new Square(row+i, (char)((int)col + 1)));
+                }
 
             } else {
                 temp = new Square(row, (char) (col + i));
+                if(i == 2) {
+                    this.occupiedSquares.add(new Square(row-1,(char)(col + i)));
+                }
             }
-            if(i == this.cqPos) {
+            if(i == 3) {
                 CQuarters = temp;
                 CQuarters.setCQ(true);
             }
             this.occupiedSquares.add(temp);
         }
     }
+
+    //@Override
+    //public boolean overlaps(ShipBase other) {
+
+    //}
+
+    public boolean getSubmerged() { return submerged; }
+
+
+
 }
