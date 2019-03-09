@@ -36,7 +36,7 @@ public class Board {
 		}
 		final var placedShip = ShipUtility.createShip(ship.getKind());
 		placedShip.place(y, x, isVertical);
-		if (ships.stream().anyMatch(s -> s.overlaps(placedShip))) {
+		if (ships.stream().anyMatch(s -> s.overlaps(placedShip)) && !ship.getKind().equals("SUBMARINE") ) {
 			return false;
 		}
 		if (placedShip.getOccupiedSquares().stream().anyMatch(s -> s.isOutOfBounds())) {
@@ -102,16 +102,15 @@ public class Board {
 		// make the potential new rows
 		for (Square pos : ship.getOccupiedSquares()) {
 			col = (int)pos.getColumn() + modifier;
+			System.out.println("Col: " + col + " " + (char)col);
 			if(col < 65 || col > (Game.BOARD_SIZE + 64)) {
-				return false;
-			}
-			if(isShip(pos)) {
 				return false;
 			}
 			newCols.add(col);
 		}
 
 		//move them over
+		System.out.println("Make it here!");
 		ship.getOccupiedSquares().forEach(s -> s.setColumn( (char)(int)(newCols.remove(0))));
 		return true;
 	}
@@ -120,6 +119,8 @@ public class Board {
 
 		// find the ship
 		var ship = ships.stream().filter(s -> s.getKind().equals(name)).findFirst().orElse(null);
+
+		System.out.println("REQ: " + name + "\tACK: " + ship.getKind());
 
 		// test if moveable
 		if(ship.isSunk()) {

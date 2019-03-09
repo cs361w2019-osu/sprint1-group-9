@@ -103,6 +103,20 @@ public class BoardTest {
     }
 
     @Test
+    public void testMoveShipHor() {
+
+        board.placeShip(new BasicShip("DESTROYER"), 1, 'A', false);
+        board.placeShip(new BasicShip("MINESWEEPER"), 5, 'D', false);
+        board.placeShip(new BasicShip("BATTLESHIP"), 1, 'H', true);
+        board.moveShip("MINESWEEPER", MoveDirection.RIGHT);
+        var ship = board.getShips().get(1);
+        assertTrue(ship.getOccupiedSquares().get(0).getColumn() == 'E');
+        assertTrue(ship.getOccupiedSquares().get(0).getRow() == 5);
+        assertTrue(ship.getOccupiedSquares().get(1).getColumn() == 'F');
+        assertTrue(ship.getOccupiedSquares().get(1).getRow() == 5);
+    }
+
+    @Test
     public void testMoveShipOutBounds() {
         board.placeShip(new BasicShip("MINESWEEPER"), 1, 'A', false);
         board.placeShip(new BasicShip("DESTROYER"), 5, 'D', false);
