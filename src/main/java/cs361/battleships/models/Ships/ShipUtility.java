@@ -1,11 +1,10 @@
 package cs361.battleships.models.Ships;
 
-import cs361.battleships.models.Submarine;
-
 public class ShipUtility {
 
     public static ShipBase createShip(String kind) {
-        if(kind == "Submarine") {
+        if(kind.equals("SUBMARINE")) {
+            System.out.println("Hit it!");
             return new Submarine();
         }
         return new BasicShip(kind);

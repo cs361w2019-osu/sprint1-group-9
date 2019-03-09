@@ -158,7 +158,7 @@ function cellClick() {
             game = data;
             redrawGrid();
             placedShips++;
-            if (placedShips == 3) {
+            if (placedShips == 4) {
                 isSetup = false;
                 registerCellListener((e) => {});
             }
@@ -171,7 +171,15 @@ function cellClick() {
         });
 
     } else if((moveShips.pressed == true)){
-              sendXhr("POST", "/move", {shipType: shipType, direction: moveShips.direction}, function(data) {
+        var shipName;
+        game.playersBoard.ships.forEach(ship => {
+            ship.occupiedSquares.forEach(p => {
+                if(row == p.row && col == p.column) {
+                    shipName = ship.kind;
+                }
+            });
+        })
+              sendXhr("POST", "/move", {shipType: shipName, direction: moveShips.direction}, function(data) {
                   game = data;
                   moveShips.direction = "NULL";
                   moveShips.pressed = false;

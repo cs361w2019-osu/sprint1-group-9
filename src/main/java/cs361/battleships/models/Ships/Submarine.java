@@ -1,8 +1,13 @@
-package cs361.battleships.models;
+package cs361.battleships.models.Ships;
 
+import cs361.battleships.models.AttackStatus;
+import cs361.battleships.models.Result;
 import cs361.battleships.models.Ships.BasicShip;
 import cs361.battleships.models.Ships.ShipBase;
 import cs361.battleships.models.Ships.ShipUtility;
+import cs361.battleships.models.Square;
+
+import java.util.ArrayList;
 
 public class Submarine extends BasicShip {
 
@@ -12,6 +17,7 @@ public class Submarine extends BasicShip {
     public Submarine (){
         this.kind = "SUBMARINE";
         this.isArmored = true;
+        occupiedSquares = new ArrayList<>();
     }
 
     @Override
@@ -64,18 +70,22 @@ public class Submarine extends BasicShip {
         return result;
     }
 
+    @Override
     public void place(char col, int row, boolean isVertical) {
         Square temp;
+        System.out.println("Got to place!!");
         for (int i=0; i<4; i++) {
             if (isVertical) {
                 temp = new Square(row + i, col);
                 if(i == 2) {
-                    this.occupiedSquares.add(new Square(row+i, (char)((int)col + 1)));
+                    System.out.println("Hit here!");
+                    this.occupiedSquares.add(new Square(row+i, (char)(col + 1)));
                 }
 
             } else {
                 temp = new Square(row, (char) (col + i));
                 if(i == 2) {
+                    System.out.println("Hit here!");
                     this.occupiedSquares.add(new Square(row-1,(char)(col + i)));
                 }
             }
@@ -86,14 +96,6 @@ public class Submarine extends BasicShip {
             this.occupiedSquares.add(temp);
         }
     }
-
-    //@Override
-    //public boolean overlaps(ShipBase other) {
-
-    //}
-
-    public boolean getSubmerged() { return submerged; }
-
 
 
 }
