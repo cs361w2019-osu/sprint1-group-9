@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>cs361.battleships.models.Ships.BasicShip</OriginalElement>
+  <nodes>
+    <node x="184.57674047264211" y="2567.0">cs361.battleships.models.Ships.BasicShip</node>
+    <node x="187.9642679724647" y="722.0">cs361.battleships.models.Board</node>
+    <node x="72.52272727272731" y="1382.5">java.lang.SuppressWarnings</node>
+    <node x="251.5227272727273" y="1227.0">cs361.battleships.models.Game</node>
+    <node x="120.29760130579811" y="11.0">java.io.Serializable</node>
+    <node x="121.04760130579805" y="101.0">java.lang.Enum</node>
+    <node x="21.111237669434445" y="523.0">cs361.battleships.models.AttackStatus</node>
+    <node x="415.7142679724647" y="523.0">cs361.battleships.models.MoveDirection</node>
+    <node x="249.2976013057981" y="0.0">java.lang.Comparable</node>
+    <node x="134.7279043361011" y="2377.0">cs361.battleships.models.Result</node>
+    <node x="443.77272727272725" y="2780.0">cs361.battleships.models.Ships.ShipUtility</node>
+    <node x="368.7570435029451" y="1992.0">cs361.battleships.models.Ships.ShipBase</node>
+    <node x="229.4642679724647" y="1659.0">cs361.battleships.models.Square</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="cs361.battleships.models.Ships.BasicShip" target="cs361.battleships.models.Result">
+      <point x="-63.714285714285694" y="-81.5" />
+      <point x="232.36245475835642" y="2537.0" />
+      <point x="171.9779043361011" y="2537.0" />
+      <point x="-37.25" y="70.0" />
+    </edge>
+    <edge source="cs361.battleships.models.Board" target="cs361.battleships.models.AttackStatus">
+      <point x="-80.0" y="-202.5" />
+      <point x="267.9642679724647" y="702.0" />
+      <point x="100.21123766943447" y="702.0" />
+      <point x="22.600000000000023" y="69.5" />
+    </edge>
+    <edge source="cs361.battleships.models.Game" target="cs361.battleships.models.Ships.ShipBase">
+      <point x="120.0" y="181.0" />
+      <point x="531.5227272727273" y="1639.0" />
+      <point x="523.4934071393087" y="1639.0" />
+      <point x="523.4934071393087" y="1972.0" />
+      <point x="500.59037683627844" y="1972.0" />
+      <point x="18.833333333333314" y="-147.5" />
+    </edge>
+    <edge source="cs361.battleships.models.Board" target="cs361.battleships.models.Game">
+      <point x="58.18181818181819" y="202.5" />
+      <point x="406.1460861542829" y="1207.0" />
+      <point x="411.5227272727273" y="1207.0" />
+      <point x="0.0" y="-181.0" />
+    </edge>
+    <edge source="cs361.battleships.models.Ships.ShipUtility" target="cs361.battleships.models.Ships.ShipBase">
+      <point x="0.0" y="-25.5" />
+      <point x="551.2727272727273" y="2755.0" />
+      <point x="572.1600738059753" y="2755.0" />
+      <point x="572.1600738059753" y="2357.0" />
+      <point x="575.9237101696117" y="2357.0" />
+      <point x="94.16666666666663" y="147.5" />
+    </edge>
+    <edge source="cs361.battleships.models.AttackStatus" target="java.lang.Enum">
+      <point x="0.0" y="-69.5" />
+      <point x="77.61123766943444" y="503.0" />
+      <point x="252.04760130579805" y="503.0" />
+      <point x="0.0" y="181.0" />
+    </edge>
+    <edge source="cs361.battleships.models.Result" target="cs361.battleships.models.Ships.ShipBase">
+      <point x="40.636363636363626" y="-70.0" />
+      <point x="249.86426797246472" y="2337.0" />
+      <point x="387.59037683627844" y="2337.0" />
+      <point x="-94.16666666666666" y="147.5" />
+    </edge>
+    <edge source="cs361.battleships.models.Board" target="cs361.battleships.models.MoveDirection">
+      <point x="80.0" y="-202.5" />
+      <point x="427.9642679724647" y="702.0" />
+      <point x="447.2142679724647" y="702.0" />
+      <point x="-31.5" y="69.5" />
+    </edge>
+    <edge source="cs361.battleships.models.Ships.BasicShip" target="cs361.battleships.models.AttackStatus">
+      <point x="-95.57142857142856" y="-81.5" />
+      <point x="200.50531190121356" y="2547.0" />
+      <point x="0.0" y="2547.0" />
+      <point x="0.0" y="682.0" />
+      <point x="32.4112376694344" y="682.0" />
+      <point x="-45.200000000000045" y="69.5" />
+    </edge>
+    <edge source="cs361.battleships.models.Ships.ShipBase" target="cs361.battleships.models.Result">
+      <point x="-18.833333333333314" y="147.5" />
+      <point x="462.9237101696118" y="2357.0" />
+      <point x="276.95517706337387" y="2357.0" />
+      <point x="67.72727272727275" y="-70.0" />
+    </edge>
+    <edge source="cs361.battleships.models.Square" target="java.lang.SuppressWarnings">
+      <point x="-77.19999999999996" y="-136.5" />
+      <point x="248.76426797246472" y="1629.0" />
+      <point x="146.0227272727273" y="1629.0" />
+      <point x="0.0" y="25.5" />
+    </edge>
+    <edge source="cs361.battleships.models.Board" target="cs361.battleships.models.Square">
+      <point x="-29.090909090909122" y="202.5" />
+      <point x="318.8733588815556" y="1187.0" />
+      <point x="241.0227272727273" y="1187.0" />
+      <point x="241.0227272727273" y="1609.0" />
+      <point x="325.9642679724647" y="1609.0" />
+      <point x="0.0" y="-136.5" />
+    </edge>
+    <edge source="cs361.battleships.models.Game" target="cs361.battleships.models.Result">
+      <point x="-120.0" y="181.0" />
+      <point x="291.5227272727273" y="1639.0" />
+      <point x="197.36426797246472" y="1639.0" />
+      <point x="197.36426797246472" y="2307.0" />
+      <point x="209.2279043361011" y="2307.0" />
+      <point x="0.0" y="-70.0" />
+    </edge>
+    <edge source="java.lang.Enum" target="java.io.Serializable">
+      <point x="-65.49999999999994" y="-181.0" />
+      <point x="186.5476013057981" y="76.0" />
+      <point x="174.7976013057981" y="76.0" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="cs361.battleships.models.Ships.BasicShip" target="cs361.battleships.models.Ships.ShipBase">
+      <point x="95.57142857142856" y="-81.5" />
+      <point x="391.64816904407064" y="2547.0" />
+      <point x="561.1600738059753" y="2547.0" />
+      <point x="561.1600738059753" y="2357.0" />
+      <point x="538.2570435029452" y="2357.0" />
+      <point x="56.5" y="147.5" />
+    </edge>
+    <edge source="java.lang.Enum" target="java.lang.Enum">
+      <point x="-87.33333333333333" y="181.0" />
+      <point x="164.7142679724647" y="483.0" />
+      <point x="101.04760130579805" y="483.0" />
+      <point x="101.04760130579805" y="282.0" />
+      <point x="-131.0" y="-0.0" />
+    </edge>
+    <edge source="cs361.battleships.models.Game" target="cs361.battleships.models.MoveDirection">
+      <point x="128.0" y="-181.0" />
+      <point x="539.5227272727273" y="1207.0" />
+      <point x="529.4642679724648" y="1207.0" />
+      <point x="529.4642679724648" y="682.0" />
+      <point x="510.2142679724647" y="682.0" />
+      <point x="31.5" y="69.5" />
+    </edge>
+    <edge source="cs361.battleships.models.Game" target="cs361.battleships.models.AttackStatus">
+      <point x="64.0" y="-181.0" />
+      <point x="475.5227272727273" y="1207.0" />
+      <point x="518.4642679724648" y="1207.0" />
+      <point x="518.4642679724648" y="692.0" />
+      <point x="122.81123766943438" y="692.0" />
+      <point x="45.19999999999993" y="69.5" />
+    </edge>
+    <edge source="cs361.battleships.models.Result" target="cs361.battleships.models.AttackStatus">
+      <point x="-54.18181818181813" y="-70.0" />
+      <point x="155.04608615428296" y="2347.0" />
+      <point x="22.0" y="2347.0" />
+      <point x="22.0" y="702.0" />
+      <point x="77.61123766943444" y="702.0" />
+      <point x="0.0" y="69.5" />
+    </edge>
+    <edge source="cs361.battleships.models.Board" target="cs361.battleships.models.Ships.ShipBase">
+      <point x="87.27272727272725" y="202.5" />
+      <point x="435.23699524519196" y="1197.0" />
+      <point x="590.9100738059755" y="1197.0" />
+      <point x="590.9100738059755" y="1962.0" />
+      <point x="538.2570435029452" y="1962.0" />
+      <point x="56.5" y="-147.5" />
+    </edge>
+    <edge source="cs361.battleships.models.Ships.BasicShip" target="cs361.battleships.models.Square">
+      <point x="0.0" y="-81.5" />
+      <point x="296.0767404726421" y="2547.0" />
+      <point x="294.2279043361011" y="2547.0" />
+      <point x="294.2279043361011" y="1972.0" />
+      <point x="298.39283940103616" y="1972.0" />
+      <point x="-27.571428571428555" y="136.5" />
+    </edge>
+    <edge source="java.lang.Enum" target="java.lang.Comparable">
+      <point x="65.50000000000006" y="-181.0" />
+      <point x="317.54760130579814" y="76.0" />
+      <point x="329.29760130579814" y="76.0" />
+      <point x="0.0" y="25.5" />
+    </edge>
+    <edge source="cs361.battleships.models.Game" target="cs361.battleships.models.Board">
+      <point x="-128.0" y="-181.0" />
+      <point x="283.5227272727273" y="1197.0" />
+      <point x="347.9642679724647" y="1197.0" />
+      <point x="0.0" y="202.5" />
+    </edge>
+    <edge source="cs361.battleships.models.Board" target="cs361.battleships.models.Ships.ShipUtility">
+      <point x="145.45454545454538" y="202.5" />
+      <point x="493.4188134270101" y="1177.0" />
+      <point x="628.439393939394" y="1177.0" />
+      <point x="628.439393939394" y="2755.0" />
+      <point x="622.939393939394" y="2755.0" />
+      <point x="71.66666666666669" y="-25.5" />
+    </edge>
+    <edge source="cs361.battleships.models.Ships.ShipUtility" target="cs361.battleships.models.Ships.BasicShip">
+      <point x="-71.66666666666669" y="-25.5" />
+      <point x="479.60606060606057" y="2755.0" />
+      <point x="296.0767404726421" y="2755.0" />
+      <point x="0.0" y="81.5" />
+    </edge>
+    <edge source="cs361.battleships.models.Ships.ShipBase" target="cs361.battleships.models.Square">
+      <point x="-56.5" y="-147.5" />
+      <point x="425.2570435029451" y="1962.0" />
+      <point x="381.1071251153218" y="1962.0" />
+      <point x="55.14285714285711" y="136.5" />
+    </edge>
+    <edge source="cs361.battleships.models.Square" target="cs361.battleships.models.Game">
+      <point x="38.60000000000002" y="-136.5" />
+      <point x="364.56426797246473" y="1639.0" />
+      <point x="371.5227272727273" y="1639.0" />
+      <point x="-40.0" y="181.0" />
+    </edge>
+    <edge source="cs361.battleships.models.Result" target="cs361.battleships.models.Square">
+      <point x="27.090909090909122" y="-70.0" />
+      <point x="236.3188134270102" y="2357.0" />
+      <point x="238.20249804839963" y="2357.0" />
+      <point x="238.20249804839963" y="1972.0" />
+      <point x="270.82141082960754" y="1972.0" />
+      <point x="-55.14285714285717" y="136.5" />
+    </edge>
+    <edge source="cs361.battleships.models.Board" target="cs361.battleships.models.Result">
+      <point x="-145.45454545454544" y="202.5" />
+      <point x="202.50972251791927" y="1147.0" />
+      <point x="40.02272727272731" y="1147.0" />
+      <point x="40.02272727272731" y="2337.0" />
+      <point x="168.59154069973746" y="2337.0" />
+      <point x="-40.636363636363626" y="-70.0" />
+    </edge>
+    <edge source="cs361.battleships.models.Game" target="cs361.battleships.models.Square">
+      <point x="40.0" y="181.0" />
+      <point x="451.5227272727273" y="1639.0" />
+      <point x="403.1642679724647" y="1639.0" />
+      <point x="77.19999999999999" y="-136.5" />
+    </edge>
+    <edge source="cs361.battleships.models.MoveDirection" target="java.lang.Enum">
+      <point x="0.0" y="-69.5" />
+      <point x="478.7142679724647" y="503.0" />
+      <point x="339.3809346391314" y="503.0" />
+      <point x="87.33333333333331" y="181.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="217.0" y="190.5" />
+  <SelectedNodes>
+    <node>cs361.battleships.models.Ships.BasicShip</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+    <Category>Inner Classes</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
