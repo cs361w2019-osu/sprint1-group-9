@@ -62,7 +62,7 @@ public class Board {
 			case UP:
 				return moveVertically(ship,-1);
 			case DOWN:
-				return moveVertically(ship,-1);
+				return moveVertically(ship,1);
 			case RIGHT:
 				return moveHorizontally(ship,1);
 			case LEFT:
