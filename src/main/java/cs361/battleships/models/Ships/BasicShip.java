@@ -36,6 +36,11 @@ public class BasicShip extends ShipBase {
                 cqPos = 2;
                 isArmored = true;
                 break;
+            case "SUBMARINE":
+                size = 5;
+                cqPos = 4;
+                isArmored = true;
+                break;
         }
     }
 
