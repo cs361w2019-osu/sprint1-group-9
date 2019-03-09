@@ -161,14 +161,17 @@ public class Board {
 			attackResult = ship.attack(s.getRow(), s.getColumn());
 		}
 
+		System.out.println("ATTACK: " + attackResult.getResult() + "\t" + "BOOL: " + Game.getInstance().getIsLaserAvailable());
+
 		if (attackResult.getResult() == AttackStatus.SUNK) {
+			Game.getInstance().setIsLaserAvailable(true);
 			if (ships.stream().allMatch(ship -> ship.isSunk())) {
 				attackResult.setResult(AttackStatus.SURRENDER);
 			}
 		}
-		if(attackResult.getResult() == AttackStatus.HIT) {
-			Game.getInstance().setIsLaserAvailable(true);
-		}
+		System.out.println("ATTACK AFTER\t" + "BOOL: " + Game.getInstance().getIsLaserAvailable());
+
+
 		return attackResult;
 	}
 
