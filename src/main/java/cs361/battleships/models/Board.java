@@ -25,6 +25,7 @@ public class Board {
 		pingsLeft = 2;
 	}
 
+
 	/*
 	DO NOT change the signature of this method. It is used by the grading scripts.
 	 */
