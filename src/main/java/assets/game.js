@@ -16,6 +16,10 @@ function laserAlert()
     }
 }
 
+var moveShips = {
+    direction: "NULL",
+    pressed: false
+};
 
 function makeGrid(table, isPlayer) {
     // add colmn header
@@ -172,7 +176,16 @@ function cellClick() {
             redrawGrid();
         });
 
-    } else {
+    } else if((moveShips.pressed == true)){
+              sendXhr("POST", "/move", {shipType: shipType, direction: moveShips.direction}, function(data) {
+                  game = data;
+                  moveShips.direction = "NULL";
+                  moveShips.pressed = false;
+                   redrawGrid();
+              });
+
+
+     }else {
         sendXhr("POST", "/attack", { x: row, y: col}, function(data) {
             game = data;
             redrawGrid();
@@ -239,6 +252,23 @@ function initGame() {
     document.getElementById("ping-button").addEventListener("click", function(e) {
         ping = true;
     });
+    document.getElementById("move-north").addEventListener("click", function(e) {
+        moveShips.direction = "UP";
+        moveShips.pressed = true;
+    });
+    document.getElementById("move-south").addEventListener("click", function(e) {
+        moveShips.direction = "DOWN";
+        moveShips.pressed = true;
+    });
+    document.getElementById("move-west").addEventListener("click", function(e) {
+        moveShips.direction = "LEFT";
+        moveShips.pressed = true;
+    });
+    document.getElementById("move-east").addEventListener("click", function(e) {
+        moveShips.direction = "RIGHT";
+        moveShips.pressed = true;
+    });
+
     sendXhr("GET", "/game", {}, function(data) {
         game = data;
     });
