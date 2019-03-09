@@ -110,6 +110,8 @@ public class BoardTest {
         assertFalse(board.moveShip("MINESWEEPER", MoveDirection.UP));
     }
 
+
+    //@Test
     public void testMoveShipOverlap() {
         board.placeShip(new BasicShip("MINESWEEPER"), 1, 'B', false);
         board.placeShip(new BasicShip("DESTROYER"), 5, 'D', false);
@@ -118,6 +120,7 @@ public class BoardTest {
         assertFalse(board.moveShip("MINESWEEPER", MoveDirection.UP));
     }
 
+    //@Test
     public void testMoveShipHit() {
         board.placeShip(new BasicShip("DESTROYER"), 1, 'A', false);
         board.placeShip(new BasicShip("MINESWEEPER"), 5, 'D', false);

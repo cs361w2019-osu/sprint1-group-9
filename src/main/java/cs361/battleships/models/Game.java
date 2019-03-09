@@ -30,6 +30,7 @@ public class Game {
 
     @JsonProperty private Board playersBoard;
     @JsonProperty private Board opponentsBoard;
+    @JsonProperty private boolean isLaserAvailable = false;
 
 
 
@@ -68,6 +69,14 @@ public class Game {
         } while(opponentAttackResult.getResult() == INVALID);
 
         return true;
+    }
+
+    public boolean getIsLaserAvailable() {
+        return isLaserAvailable;
+    }
+
+    public void setIsLaserAvailable(boolean val) {
+        isLaserAvailable = val;
     }
 
 

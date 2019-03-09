@@ -4,11 +4,22 @@ var game;
 var shipType;
 var vertical;
 var ping = false;
+var laserCheck = false;
+
+function laserAlert()
+{
+    if (game.isLaserAvailable == true && laserCheck == false)
+    {
+        alert("ACTIVATION CODE RECEIVED.\n\n SPACE LASER: ENGAGED.");
+        laserCheck = true;
+        return;
+    }
+}
+
 var moveShips = {
     direction: "NULL",
     pressed: false
 };
-
 
 function makeGrid(table, isPlayer) {
     // add colmn header
@@ -76,6 +87,7 @@ function markHits(board, elementId, surrenderText) {
             className = "hit";
         else if (attack.result === "SUNK") {
             sinkShip(board, elementId, attack);
+            laserAlert();
             return;
         }
         else if (attack.result === "SURRENDER") {
@@ -153,9 +165,15 @@ function cellClick() {
         });
     } else if(ping) {
         ping = false;
+        /*
         sendXhr("POST", "/ping", { x: row, y: col}, function(data) {
             game = data;
             pingBoard(data.opponentsBoard.pings);
+        });
+        */
+        sendXhr("POST", "/move", { shipType: "MINESWEEPER", direction: "UP"}, function(data) {
+            game = data;
+            redrawGrid();
         });
 
     } else if((moveShips.pressed == true)){
