@@ -6,6 +6,16 @@ var vertical;
 var ping = false;
 var laserCheck = false;
 
+function laserAlert()
+{
+    if (game.isLaserAvailable == true && laserCheck == false)
+    {
+        alert("ACTIVATION CODE RECEIVED.\n\n SPACE LASER: ENGAGED.");
+        laserCheck = true;
+        return;
+    }
+}
+
 function makeGrid(table, isPlayer) {
     // add colmn header
     let titrow = document.createElement('tr');
@@ -231,15 +241,4 @@ function initGame() {
     sendXhr("GET", "/game", {}, function(data) {
         game = data;
     });
-
-function laserAlert()
-{
-    if (game.isLaserAvailable == true && laserCheck == false)
-    {
-        alert("ACTIVATION CODE RECEIVED.\n\n SPACE LASER: ENGAGED.");
-        laserCheck = true;
-        return;
-    }
-}
-
 };
