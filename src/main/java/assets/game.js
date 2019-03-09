@@ -159,10 +159,11 @@ function cellClick() {
         });
 
     } else if((moveShips.pressed == true)){
-              sendXhr("POST", "/move", {shipType: shipType, direction: moveShips}, function(data) {
+              sendXhr("POST", "/move", {shipType: shipType, direction: moveShips.direction}, function(data) {
                   game = data;
                   moveShips.direction = "NULL";
                   moveShips.pressed = false;
+                   redrawGrid();
               });
 
 
@@ -246,7 +247,7 @@ function initGame() {
         moveShips.pressed = true;
     });
     document.getElementById("move-east").addEventListener("click", function(e) {
-        moveShips.direction = "EAST";
+        moveShips.direction = "RIGHT";
         moveShips.pressed = true;
     });
 
