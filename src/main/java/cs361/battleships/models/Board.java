@@ -137,7 +137,6 @@ public class Board {
                     s.getCQ()).anyMatch(cq -> cq.equals(pos)));
     }
 
-
 	private Result attack(Square s) {
 		if (attacks.stream().anyMatch(r -> r.getLocation().equals(s) && !isCQ(r.getLocation()))) {
 			var attackResult = new Result(s);
@@ -149,12 +148,26 @@ public class Board {
 			var attackResult = new Result(s);
 			return attackResult;
 		}
-		var hitShip = shipsAtLocation.get(0);
-		var attackResult = hitShip.attack(s.getRow(), s.getColumn());
+
+		Result attackResult = null;
+
+		for(ShipBase ship: shipsAtLocation) {
+			if(ship.getKind().equals("SUBMARINE")) {
+				var isSubmerged = true;
+				if(isSubmerged && Game.getInstance().getIsLaserAvailable()) {
+					attackResult = ship.attack(s.getRow(), s.getColumn());
+				}
+			}
+			attackResult = ship.attack(s.getRow(), s.getColumn());
+		}
+
 		if (attackResult.getResult() == AttackStatus.SUNK) {
 			if (ships.stream().allMatch(ship -> ship.isSunk())) {
 				attackResult.setResult(AttackStatus.SURRENDER);
 			}
+		}
+		if(attackResult.getResult() == AttackStatus.HIT) {
+			Game.getInstance().setIsLaserAvailable(true);
 		}
 		return attackResult;
 	}

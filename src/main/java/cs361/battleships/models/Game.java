@@ -71,6 +71,14 @@ public class Game {
         return true;
     }
 
+    public boolean getIsLaserAvailable() {
+        return isLaserAvailable;
+    }
+
+    public void setIsLaserAvailable(boolean val) {
+        isLaserAvailable = val;
+    }
+
 
     public boolean moveShip(String shipName, MoveDirection direction) {
         playersBoard.moveShip(shipName, direction);
