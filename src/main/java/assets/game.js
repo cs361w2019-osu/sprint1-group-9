@@ -189,6 +189,9 @@ function initGame() {
     document.getElementById("ping-button").addEventListener("click", function(e) {
         ping = true;
     });
+   // document.getElementById("move-ships").addEventListener("click", function(e) {
+
+    //});
     sendXhr("GET", "/game", {}, function(data) {
         game = data;
     });
