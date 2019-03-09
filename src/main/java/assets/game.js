@@ -16,6 +16,7 @@ function laserAlert()
     }
 }
 
+
 function makeGrid(table, isPlayer) {
     // add colmn header
     let titrow = document.createElement('tr');
