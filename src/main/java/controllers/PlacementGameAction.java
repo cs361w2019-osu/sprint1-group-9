@@ -5,15 +5,11 @@ import cs361.battleships.models.Game;
 
 public class PlacementGameAction {
 
-    @JsonProperty private Game game;
     @JsonProperty private String shipType;
     @JsonProperty private int x;
     @JsonProperty private char y;
     @JsonProperty private boolean isVertical;
 
-    public Game getGame() {
-        return game;
-    }
 
     public int getActionRow() {
         return x;

@@ -39,6 +39,34 @@ function makeGrid(table, isPlayer) {
     }
 }
 
+
+function getSquare(row, col, board) {
+    return board.rows[row].cells[col.charCodeAt(0) - 'A'.charCodeAt(0) + 1];
+}
+
+
+function markShipSunk(elementId, ship) {
+    var board = document.getElementById(elementId);
+    ship.occupiedSquares.forEach((s) => {
+        let tile = getSquare(s.row, s.column, board);
+        tile.innerHTML = "";
+        tile.classList.add('sink');
+    });
+}
+
+
+function sinkShip(board, elementId, attack) {
+    board.ships.forEach((ship) => {
+        ship.occupiedSquares.forEach((s) => {
+            if(attack.location.row == s.row && attack.location.col == s.col) {
+                markShipSunk(elementId, ship);
+                return;
+            }
+        });
+    });
+}
+
+
 function markHits(board, elementId, surrenderText) {
     board.attacks.forEach((attack) => {
         let className;
@@ -46,10 +74,14 @@ function markHits(board, elementId, surrenderText) {
             className = "miss";
         else if (attack.result === "HIT")
             className = "hit";
-        else if (attack.result === "SUNK")
-            className = "sink"
-        else if (attack.result === "SURRENDER")
+        else if (attack.result === "SUNK") {
+            sinkShip(board, elementId, attack);
+            return;
+        }
+        else if (attack.result === "SURRENDER") {
             alert(surrenderText);
+            return;
+        }
         else
             return;
         let square = document.getElementById(elementId).rows[attack.location.row].cells[attack.location.column.charCodeAt(0) - 'A'.charCodeAt(0) + 1];
@@ -91,9 +123,6 @@ function registerCellListener(f) {
     oldListener = f;
 }
 
-function getSquare(row, col, board) {
-    return board.rows[row].cells[col.charCodeAt(0) - 'A'.charCodeAt(0) + 1];
-}
 
 function pingBoard(pingList) {
     pingList.forEach(r => {
@@ -105,13 +134,15 @@ function pingBoard(pingList) {
         }
 
     });
+    var pingButton = document.getElementById('ping-button');
+    pingButton.innerText = "Ping: " + game.opponentsBoard.pingsLeft;
 }
 
 function cellClick() {
     let row = this.parentNode.rowIndex;
     let col = String.fromCharCode(this.cellIndex + 64);
     if (isSetup) {
-        sendXhr("POST", "/place", {game: game, shipType: shipType, x: row, y: col, isVertical: vertical}, function(data) {
+        sendXhr("POST", "/place", { shipType: shipType, x: row, y: col, isVertical: vertical}, function(data) {
             game = data;
             redrawGrid();
             placedShips++;
@@ -122,21 +153,21 @@ function cellClick() {
         });
     } else if(ping) {
         ping = false;
-        sendXhr("POST", "/ping", {game: game, x: row, y: col}, function(data) {
+        sendXhr("POST", "/ping", { x: row, y: col}, function(data) {
             game = data;
             pingBoard(data.opponentsBoard.pings);
         });
 
     } else if((moveShips.pressed == true)){
-        sendXhr("POST", "/move", {shipType: shipType, direction: moveShips}, function(data) {
-            game = data;
-            moveShips.direction = "NULL";
-            moveShips.pressed = false;
-        });
+              sendXhr("POST", "/move", {shipType: shipType, direction: moveShips}, function(data) {
+                  game = data;
+                  moveShips.direction = "NULL";
+                  moveShips.pressed = false;
+              });
 
 
-    }else {
-        sendXhr("POST", "/attack", {game: game, x: row, y: col}, function(data) {
+     }else {
+        sendXhr("POST", "/attack", { x: row, y: col}, function(data) {
             game = data;
             redrawGrid();
         })

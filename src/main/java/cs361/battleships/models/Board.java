@@ -1,6 +1,9 @@
 package cs361.battleships.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import cs361.battleships.models.Ships.BasicShip;
+import cs361.battleships.models.Ships.ShipBase;
+import cs361.battleships.models.Ships.ShipUtility;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +11,7 @@ import java.util.stream.Collectors;
 
 public class Board {
 
-	@JsonProperty private List<Ship> ships;
+	@JsonProperty private List<ShipBase> ships;
 	@JsonProperty private List<Result> attacks;
 	@JsonProperty private List<Result> pings;
 	@JsonProperty private int pingsLeft;
@@ -25,14 +28,12 @@ public class Board {
 	/*
 	DO NOT change the signature of this method. It is used by the grading scripts.
 	 */
-	public boolean placeShip(Ship ship, int x, char y, boolean isVertical) {
-		if (ships.size() >= 3) {
-			return false;
-		}
+	public boolean placeShip(ShipBase ship, int x, char y, boolean isVertical) {
+
 		if (ships.stream().anyMatch(s -> s.getKind().equals(ship.getKind()))) {
 			return false;
 		}
-		final var placedShip = new Ship(ship.getKind());
+		final var placedShip = ShipUtility.createShip(ship.getKind());
 		placedShip.place(y, x, isVertical);
 		if (ships.stream().anyMatch(s -> s.overlaps(placedShip))) {
 			return false;
@@ -53,6 +54,80 @@ public class Board {
 		return attackResult;
 	}
 
+
+	private boolean move(ShipBase ship, MoveDirection direction) {
+
+		switch (direction) {
+			case UP:
+				return moveVertically(ship,-1);
+			case DOWN:
+				return moveVertically(ship,-1);
+			case RIGHT:
+				return moveHorizontally(ship,1);
+			case LEFT:
+				return moveHorizontally(ship,-1);
+		}
+		return false;
+	}
+
+	private boolean isShip(Square pos) {
+		return ships.stream().anyMatch(ship ->
+				ship.getOccupiedSquares().stream().anyMatch( s ->
+						s.equals(pos)));
+	}
+
+	private boolean moveVertically(ShipBase ship, int modifier) {
+		var newRows = new ArrayList<Integer>();
+		int row;
+
+		// make the potential new rows
+		for (Square pos : ship.getOccupiedSquares()) {
+			row = pos.getRow() + modifier;
+			if(row < 0 || row > Game.BOARD_SIZE) {
+				return false;
+			}
+			newRows.add(row);
+		}
+
+		//move them over
+		ship.getOccupiedSquares().forEach(s -> s.setRow(newRows.remove(0)));
+		return true;
+	}
+
+	private boolean moveHorizontally(ShipBase ship, int modifier) {
+		var newCols = new ArrayList<Integer>();
+		int col;
+
+		// make the potential new rows
+		for (Square pos : ship.getOccupiedSquares()) {
+			col = (int)pos.getColumn() + modifier;
+			if(col < 65 || col > (Game.BOARD_SIZE + 64)) {
+				return false;
+			}
+			if(isShip(pos)) {
+				return false;
+			}
+			newCols.add(col);
+		}
+
+		//move them over
+		ship.getOccupiedSquares().forEach(s -> s.setColumn( (char)(int)(newCols.remove(0))));
+		return true;
+	}
+
+	public boolean moveShip(String name, MoveDirection direction) {
+
+		// find the ship
+		var ship = ships.stream().filter(s -> s.getKind().equals(name)).findFirst().orElse(null);
+
+		// test if moveable
+		if(ship.isSunk()) {
+			return false;
+		}
+
+		//move it
+		return move(ship, direction);
+	}
 
 
 	private boolean isCQ(Square pos) {
@@ -84,7 +159,7 @@ public class Board {
 	}
 
 
-	List<Ship> getShips() {
+	List<ShipBase> getShips() {
 		return ships;
 	}
 
@@ -99,8 +174,8 @@ public class Board {
 	 ********************************************************************/
 
 	public void checkAndAppend(int temp1, char temp2) {
-		if (temp1 >= 1 && temp1 <= 10){
-			if (temp2 >= 'A' && temp2 <= 'J'){
+		if (temp1 >= 1 && temp1 <= Game.BOARD_SIZE){
+			if (temp2 >= 'A' && temp2 <= (char)(64 + Game.BOARD_SIZE)){
 
 				boolean rep = false;
 
@@ -117,15 +192,9 @@ public class Board {
 				//	System.out.println("Coordinates within range.\n");
 					Square pingPos = new Square(temp1, temp2);
 
-
-					var ishit = ships.stream().anyMatch(ship ->
-						ship.getOccupiedSquares().stream().anyMatch( s ->
-								s.equals(pingPos)));
-
-
 					Result r = new Result(pingPos);
 
-					if(ishit) {
+					if(isShip(pingPos)) {
 						r.setResult(AttackStatus.HIT);
 					} else {
 						r.setResult(AttackStatus.MISS);

@@ -21,15 +21,16 @@ public class Square {
 
 	public boolean getCQ(){ return cap;}
     public void setCQ(boolean s) { cap = s; }
-//
 
 	public char getColumn() {
 		return column;
 	}
-
 	public int getRow() {
 		return row;
 	}
+
+	public void setColumn(char column) {this.column = column;}
+	public void setRow(int row) {this.row = row;}
 
 
 	@Override
@@ -47,7 +48,7 @@ public class Square {
 
 	@JsonIgnore
 	public boolean isOutOfBounds() {
-		return row > 10 || row < 1 || column > 'J' || column < 'A';
+		return row > Game.BOARD_SIZE || row < 1 || column > (char)(64 + Game.BOARD_SIZE) || column < 'A';
 	}
 
 	public boolean isHit() {

@@ -2,12 +2,11 @@ package controllers;
 
 import com.google.inject.Singleton;
 import cs361.battleships.models.Game;
-import cs361.battleships.models.Ship;
+import cs361.battleships.models.Ships.ShipBase;
+import cs361.battleships.models.Ships.ShipUtility;
 import ninja.Context;
 import ninja.Result;
 import ninja.Results;
-
-import java.util.List;
 
 @Singleton
 public class ApplicationController {
@@ -17,36 +16,42 @@ public class ApplicationController {
     }
 
     public Result newGame() {
-        Game g = new Game();
-        return Results.json().render(g);
+        Game.getInstance().reset();
+        return Results.json().render(Game.getInstance());
     }
 
     public Result placeShip(Context context, PlacementGameAction g) {
-        Game game = g.getGame();
-        Ship ship = new Ship(g.getShipType());
-        boolean result = game.placeShip(ship, g.getActionRow(), g.getActionColumn(), g.isVertical());
+        ShipBase ship = ShipUtility.createShip(g.getShipType());
+        boolean result = Game.getInstance().placeShip(ship, g.getActionRow(), g.getActionColumn(), g.isVertical());
         if (result) {
-            return Results.json().render(game);
+            return Results.json().render(Game.getInstance());
         } else {
             return Results.badRequest();
         }
     }
 
     public Result attack(Context context, AttackGameAction g) {
-        Game game = g.getGame();
-        boolean result = game.attack(g.getActionRow(), g.getActionColumn());
+        boolean result = Game.getInstance().attack(g.getActionRow(), g.getActionColumn());
         if (result) {
-            return Results.json().render(game);
+            return Results.json().render(Game.getInstance());
+        } else {
+            return Results.badRequest();
+        }
+    }
+
+    public Result moveShip(Context context, MoveShipGameAction g) {
+        boolean result = Game.getInstance().moveShip(g.getShipType(), g.getDirection());
+        if (result) {
+            return Results.json().render(Game.getInstance());
         } else {
             return Results.badRequest();
         }
     }
 
     public Result ping(Context context, AttackGameAction g) {
-        Game game = g.getGame();
-        var result = game.ping(g.getActionRow(), g.getActionColumn());
+        var result = Game.getInstance().ping(g.getActionRow(), g.getActionColumn());
         if (result) {
-            return Results.json().render(game);
+            return Results.json().render(Game.getInstance());
         } else {
             return Results.badRequest();
         }
